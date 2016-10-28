@@ -1,0 +1,32 @@
+# main help
+  ./run.py -h
+
+# The only one positional arguments -- path to cfg.py file (as used with cmsRun)
+
+# User %FILENAME% tag as place for filesname (don't use quotas, the run.py will produce
+# python list with filenames like:
+# >>>
+# process.source = cms.Source("PoolSource",
+#     fileNames = %FILENAME%
+# )
+# <<<
+
+# EXTRA_* env variables leads to string substition (overrides via --env_prefix option)
+  EXTRA_maxevents=10 ./run.py -n --cmssw CMSSW_5_3_32 --output-dir test0 --eos-dir store/data/Commissioning2016/MinimumBias/RAW/v1/000/265/655/00000 CMSSW_5_3_32/src/test/TestPFG/testpfg_cfg.py  > run.sh 
+
+# You should use --eos-dir || --files-from || --run and --dataset options
+  ./run.py --cmssw CMSSW_5_3_32 --output_dir test0 --eos-dir store/data/Commissioning2016/MinimumBias/RAW/v1/000/265/655/00000 CMSSW_5_3_32/src/test/TestPFG/testpfg_cfg.py
+  ./run.py --run 267375  --dataset /ExpressCosmics/Commissioning2016-Express-v1/FEVT -cmssw CMSSW_5_3_32 --output-dir test0  CMSSW_5_3_32/src/test/TestPFG/testpfg_cfg.py 
+  ./run.py --cmssw CMSSW_5_3_32 --output-dir test0 --files-from filewithfilesnames CMSSW_5_3_32/src/test/TestPFG/testpfg_cfg.py
+
+# if -n (dry-run mode) is specified you will get shell commands in stdout (no jobs will be submitted)
+
+  ./run.py -n --cmssw CMSSW_5_3_32 --output_dir test0 --eos-dir store/data/Commissioning2016/MinimumBias/RAW/v1/000/265/655/00000 CMSSW_5_3_32/src/test/TestPFG/testpfg_cfg.py
+
+# --cmssw    -- path to cmssw working directory (to prepare environment)
+# --maxfiles -- just to pass N (random?first?) files to lxbatch (for testing purposes)
+# --regexp   -- pass files matching regex
+# --lxopts   -- options to bsub command ("-q 8nh -J test" for example)
+
+
+./run.py --cmssw CMSSW_8_0_13 --output_dir Express_276315 --eos-dir store/express/Run2016D/ExpressPhysics/FEVT/Express-v2/000/276/315/00000 CMSSW_8_0_13/src/EcalPFG/EcalFETree/test/pfgbatch/EcalFEAnalyser_cfg.py
