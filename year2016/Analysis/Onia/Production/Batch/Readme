@@ -29,4 +29,4 @@
 # --lxopts   -- options to bsub command ("-q 8nh -J test" for example)
 
 
-./run.py --cmssw CMSSW_8_0_13 --output_dir Express_276315 --eos-dir store/express/Run2016D/ExpressPhysics/FEVT/Express-v2/000/276/315/00000 CMSSW_8_0_13/src/EcalPFG/EcalFETree/test/pfgbatch/EcalFEAnalyser_cfg.py
+./run.py --output-dir Express_276315 --eos-dir store/express/Run2016D/ExpressPhysics/FEVT/Express-v2/000/276/315/00000 CMSSW_8_0_13/src/EcalPFG/EcalFETree/test/pfgbatch/EcalFEAnalyser_cfg.py

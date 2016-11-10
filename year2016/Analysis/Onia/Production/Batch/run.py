@@ -75,6 +75,7 @@ parser.add_argument('infile', help="CMSSW configuration file to process", metava
 parser.add_argument('--eos-dir', help="EOS directory with .root files", dest='eos_dir', metavar="directory")
 parser.add_argument('--run', help="Run number", dest='run', metavar="run", type=int)
 parser.add_argument('--dataset', help="Dataset", dest='dataset', metavar="dataset")
+parser.add_argument('--instance', help="DAS Instance", dest='instance', metavar="instance")
 parser.add_argument('--cmssw', help="Path to CMSSW", dest='cmssw_dir', metavar="path", default = ".")
 parser.add_argument('--output-dir', help="Output directory", dest='output_dir', metavar="directory", default="results")
 parser.add_argument('--lxopts', help="lxbatch options", dest='lxopts', metavar="string", default = "")
@@ -127,12 +128,21 @@ elif source == "eos":
   infiles = stdout.split("\n")
 elif source == "das":
   print "# Calling DAS ..."
-  p = subprocess.Popen(["python", osjoin(dirname(sys.argv[0]), "das_client.py"), "--query=file run={0} dataset={1}".format(args.run, args.dataset), '--limit=0'],
-        stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+  if args.run and args.instance:
+      cmd = "{0} --limit=0 --query='file run={1}  dataset={2} instance={3}'".format(osjoin(dirname(sys.argv[0]), "das_client.py"), args.run, args.dataset, args.instance)
+  elif args.run:
+      cmd = "{0} --limit=0 --query='file run={1}  dataset={2}'".format(osjoin(dirname(sys.argv[0]), "das_client.py"), args.run, args.dataset)
+  elif args.instance:
+      cmd = "{0} --limit=0 --query='file dataset={1} instance={2}'".format(osjoin(dirname(sys.argv[0]), "das_client.py"), args.dataset, args.instance)
+  else:
+      cmd = "{0} --limit=0 --query='file dataset={1}'".format(osjoin(dirname(sys.argv[0]), "das_client.py"), args.dataset)
+
+  p = subprocess.Popen(cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE, shell=True)
   stdout, stderr = p.communicate()
   if len(stderr) != 0:
     print "# Something wrong happened with DAS:", stderr
-  infiles = stdout.split("\n") 
+  infiles = stdout.split("\n")
+  infiles.pop(1)
 
 fidx = 0
 if args.regexp_name:
