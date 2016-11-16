@@ -7,6 +7,11 @@ b) the input needed
 c) the output
 d) how to run the macro
 
+## Analysis
+## Analysis/Onia
+## Analysis/Onia/Tools
+### OniaQA.C
+Requires opening an OniaTree root file, and navigating to the directory with the tree "myTree".  Draws about 20 histograms of various distributions, event-wise, muon-wise, and muon-pair-wise.  Includes an example of using the dimuon 4-momentum to obtain the opening angle between the muons (since one can't use the v1.Angle(v2) functionality in a Tree->Draw() command).
 ## .
 ### compare.C
 Loops over two ROOT files with a common structure and plots histograms that are significantly different (based on chi2 or KS) between the two.
