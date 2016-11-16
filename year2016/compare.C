@@ -112,10 +112,8 @@ void compare(const char* name1, const char* nameref, int run1, int runref) {
    TFile *fref = new TFile(nameref);
    if (!fref) return;
 
-   TDirectory *t1 = (TDirectory*) f1->Get("Run summary");
-   if (!t1) return;
-   TDirectory *tref = (TDirectory*) fref->Get("Run summary");
-   if (!tref) return;
+   TDirectory *t1 = (TDirectory*) f1;
+   TDirectory *tref = (TDirectory*) fref;
 
    CompDir(t1,tref,run1,runref);
 }
