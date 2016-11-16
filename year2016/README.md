@@ -17,3 +17,6 @@ Extracts the Muon directory from offline DQM files
 ## Trigger
 ### checkrates.C
 Compares rates from the output of recorded_by_HLT_path (with option --scalerate 1e6) to the expectation
+
+## HLT_runbyrun
+See https://twiki.cern.ch/twiki/bin/view/CMS/HITriggerTool
