@@ -4,10 +4,12 @@
 #include "TFile.h"
 #include "TSystem.h"
 #include "TTree.h"
+#include "TObjArray.h"
 
 double minpval = 0.01;
 
 void CompDir(TDirectory *t1, TDirectory *tref, int run1, int runref);
+void CompDir(TObjArray *t1, TObjArray *tref, int run1, int runref);
 void CompHist(TH1 *h1, TH1 *href, int run1, int runref);
       
 void CompDir(TDirectory *t1, TDirectory *tref, int run1, int runref) {
@@ -25,10 +27,36 @@ void CompDir(TDirectory *t1, TDirectory *tref, int run1, int runref) {
          tref->cd(key->GetName());
          TDirectory *subdirref = gDirectory;
          CompDir(subdir,subdirref,run1,runref);
+      } else if (cl->InheritsFrom("TObjArray")) {
+         TObjArray *subdir = (TObjArray*)t1->Get(key->GetName());
+         TObjArray *subdirref = (TObjArray*)tref->Get(key->GetName());
+         CompDir(subdir,subdirref,run1,runref);
       } else if (TString(classname) == "TH1F") {
          TH1 *h1 = (TH1*)t1->Get(key->GetName());
          TH1 *href = (TH1*)tref->Get(key->GetName());
          CompHist(h1,href,run1,runref);
+      } else {
+         // do nothing
+     }
+  }
+}
+      
+void CompDir(TObjArray *t1, TObjArray *tref, int run1, int runref) {
+   //loop on all entries of this directory
+   if (t1->GetSize()==0) return;
+   const char* classname = t1->Last()->ClassName();
+   TClass *cl = gROOT->GetClass(classname);
+   TKey *key;
+   TObjArrayIter nextkey(t1);
+   while ((key = (TKey*)nextkey())) {
+      if (!tref->FindObject(key->GetName())) continue;
+      if (!cl) continue;
+      if (cl->InheritsFrom("TDirectory")) {
+         CompDir((TDirectory*) key, (TDirectory*) tref->FindObject(key->GetName()),run1,runref);
+      } else if (cl->InheritsFrom("TObjArray")) {
+         CompDir((TObjArray*) key, (TObjArray*) tref->FindObject(key->GetName()),run1,runref);
+      } else if (TString(classname) == "TH1F") {
+         CompHist((TH1F*) key, (TH1F*) tref->FindObject(key->GetName()),run1,runref);
       } else {
          // do nothing
      }
@@ -70,6 +98,7 @@ void CompHist(TH1 *h1, TH1 *href, int run1, int runref) {
 
    TCanvas *c1 = new TCanvas();
    href->SetLineColor(kRed);
+   href->SetMarkerColor(kRed);
    if (!iswt) href->DrawNormalized();
    else href->Draw();
    c1->Update();
@@ -83,6 +112,7 @@ void CompHist(TH1 *h1, TH1 *href, int run1, int runref) {
    ps->SetY2NDC(0.8);
 
    h1->SetLineColor(kBlack);
+   h1->SetMarkerColor(kBlack);
    if (!iswt) h1->DrawNormalized("sames");
    else h1->Draw("sames");
    c1->Update();
