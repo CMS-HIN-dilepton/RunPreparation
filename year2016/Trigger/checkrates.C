@@ -68,6 +68,8 @@ void checkrates(const char* filename="dqm.root") {
       TH1F *h = (TH1F*) f->Get(triggername[i]);
       if (!h) continue;
       h->GetYaxis()->SetRangeUser(0,2.5*exprates[i]+10);
+      h->SetMarkerColor(kRed);
+      h->SetLineColor(kBlack);
       h->Draw();
       TLine *line = new TLine(0,exprates[i]/factor,h->GetNbinsX(),exprates[i]/factor);
       line->SetLineColor(kRed);
