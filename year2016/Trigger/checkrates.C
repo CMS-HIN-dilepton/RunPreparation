@@ -55,7 +55,7 @@ double exprates[28] = {96,
    3188,
    1092};
 
-double factor = 1.3;
+double factor = 1.;
 
 void checkrates(const char* filename="dqm.root") {
    TFile *f = TFile::Open(filename);
@@ -67,14 +67,23 @@ void checkrates(const char* filename="dqm.root") {
    for (int i=0; i<28; i++) {
       TH1F *h = (TH1F*) f->Get(triggername[i]);
       if (!h) continue;
-      h->GetYaxis()->SetRangeUser(0,2.5*exprates[i]+10);
+      TF1 *f = new TF1("pol","pol0",0,h->GetXaxis()->GetXmax());
+      h->Fit(f);
+      f->SetLineColor(kRed);
+      float fittedrate = f->GetParameter(0);
+      h->GetYaxis()->SetRangeUser(0,1.5*TMath::Max((Float_t) (exprates[i]/factor),(Float_t) fittedrate)+10);
       h->SetMarkerColor(kRed);
       h->SetLineColor(kBlack);
       h->Draw();
-      TLine *line = new TLine(0,exprates[i]/factor,h->GetNbinsX(),exprates[i]/factor);
-      line->SetLineColor(kRed);
+      f->Draw("same");
+      TLine *line = new TLine(1,exprates[i]/factor,h->GetNbinsX(),exprates[i]/factor);
+      line->SetLineColor(kBlue);
       line->Draw();
+      TLatex tl1; tl1.SetTextColor(kBlue); tl1.DrawLatexNDC(0.2,0.85,Form("Expected at 1MHz: %.2f",exprates[i]/factor));
+      TLatex tl2; tl2.SetTextColor(kRed); tl2.DrawLatexNDC(0.2,0.8,Form("Observed at 1MHz: %.2f",fittedrate));
+      TLatex tl3; tl2.SetTextColor(kBlack); tl2.DrawLatexNDC(0.2,0.75,Form("Ratio: %.2f",fittedrate/(exprates[i]/factor)));
       c1->SaveAs(Form("%s.pdf",triggername[i]));
+      delete f;
    }
    f->Close();
 }
