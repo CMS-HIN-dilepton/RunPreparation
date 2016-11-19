@@ -15,6 +15,7 @@
 #include "TClass.h"
 #include "TKey.h"
 #include "TH1.h"
+#include "TProfile.h"
 #include "TROOT.h"
 
 using namespace std;
@@ -40,8 +41,12 @@ string outputfile = "NONE";
 double lumifactor = -1.;
 TString pattern   = ".*";
 vector<TRegexp> patterns;
-const double magicfactor = 4.17e-7;
+const double magicfactor_5tev = 4.17e-7;
+const double magicfactor_8tev = 5.35e-7;
+double magicfactor=magicfactor_5tev;
 bool   nooutput   = true;
+int    rebin      = 1;
+bool   extrapol   = false;
 
 // this structure is intended to contain a pair<run number, <lumi section start, lumi section stop>>
 typedef vector<pair<int,pair<int,int> > > lumirange;
@@ -77,6 +82,7 @@ long double sum(vector<tripletI> t, vector<tripletD> tlumi);
 set<pair<int,int> > makeset(map<string,vector<tripletI> > themap);
 map<pair<int,int>,int> makemap(set<pair<int,int> > theset);
 TH1F* makehist(const char* name, vector<tripletI> v, vector<tripletI> v_aux, vector<tripletD> v_ref, map<pair<int,int>,int> themap, bool dotime, bool dorate, bool doprescale, bool hum);
+void extrapolate(TH1 *hist);
 
 
 //////////
@@ -100,8 +106,10 @@ int main(int argc, const char** argv) {
       cout << " --json: JSON to use for counting events (default: " << jsonfile << ")" << endl;
       cout << " --basedir: path to the DQM files (default: " << basedir << ")" << endl;
       cout << " --output: path to the output file (default: " << outputfile << ")" << endl;
+      cout << " --rebin xx: merge xx bins together in the output file (default: " << rebin << ")" << endl;
       cout << " --scalerate 1000: if >0, scale rates to this target collision rate (in Hz), using the online luminosity (default: " << lumifactor << ")" << endl;
       cout << " --pattern pattern1,pattern2,...: comma-separated list of patterns to match to paths (in the format of TRegexp) (default: " << pattern << ")" << endl;
+      cout << " --extrapolate: correct for missing lumi sections" << endl;
       cout << endl;
       cout << "See also https://twiki.cern.ch/twiki/bin/view/CMS/HITriggerTool for more information." << endl;
       return 1;
@@ -122,10 +130,12 @@ int main(int argc, const char** argv) {
       else if (arg=="--json"&&argc>i+1) {i++; jsonfile = argv[i];}
       else if (arg=="--basedir"&&argc>i+1) {i++; basedir = argv[i];}
       else if (arg=="--output"&&argc>i+1) {i++; outputfile = argv[i];}
+      else if (arg=="--rebin"&&argc>i+1) {i++; rebin = atoi(argv[i]);}
       else if (arg=="--minrun"&&argc>i+1) {i++; minrun = atoi(argv[i]);}
       else if (arg=="--maxrun"&&argc>i+1) {i++; maxrun = atoi(argv[i]);}
       else if (arg=="--scalerate"&&argc>i+1) {i++; lumifactor = magicfactor*atof(argv[i]);}
       else if (arg=="--pattern"&&argc>i+1) {i++; pattern = argv[i];}
+      else if (arg=="--extrapolate") {extrapol = true;}
       else cout << "Unsupported option " << argv[i] << endl;
    }
 
@@ -145,7 +155,9 @@ int main(int argc, const char** argv) {
    }
    if (lumifactor>0) dorate = true;
 
-   // if (maxrun <= xxxx && jsonfile == jsonfile_8tev) jsonfile = jsonfile_5tev;
+   if (maxrun <= 285478 && jsonfile == jsonfile_8tev) jsonfile = jsonfile_5tev;
+   if (minrun >= 285478 && jsonfile == jsonfile_5tev) jsonfile = jsonfile_8tev;
+   if (minrun >= 285478) lumifactor *= magicfactor_8tev / magicfactor_5tev;
 
    cout << "Will count events by " << theType;
    if (string(theType) == "HLT") cout << ":" << theHlttype;
@@ -218,6 +230,7 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
    }
    TString tdirname = Form("DQMData/Run %i/HLT/Run summary/TriggerRates/",run) + TString(type);
    f->cd(tdirname);
+   TProfile *hlumi = (TProfile*) f->Get(Form("DQMData/Run %i/HLT/Run summary/LumiMonitoring/lumiVsLS",run));
 
    // if HLT: accept, error, pass L1 seed, pass prescaler, reject
 
@@ -242,6 +255,8 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
 
       int nlumis = (lumiend+1-lumistart);
 
+      if (extrapol) extrapolate(h);
+
       if (type != "HLT") fill(cnt[h->GetName()], h, run, lumistart, lumiend, docnt);
       else {
          string htitle(h->GetTitle());
@@ -257,7 +272,6 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
          // && (!(cntref.size()>0 && cntref[cntref.size()-1].i0==run)) // do not fill the lumi vector twice for the same run
          && doref
          ) {
-      TH1F *hlumi = (TH1F*) f->Get(Form("DQMData/Run %i/HLT/Run summary/LumiMonitoring/lumiVsLS",run));
       fill(cntref, hlumi, run, lumistart, lumiend);
    }
 
@@ -325,9 +339,10 @@ template<typename T> void fill(vector<triplet<T> > &t, TH1* h, int run, int lumi
    if (nooutput) {
       t.push_back(triplet<T>(run,lumistart,docnt ? lumiend-lumistart+1 : h->Integral(lumistart+1,lumiend+1)));
    } else {
-      for (int i=lumistart; i<=lumiend; i++) {
-         if (docnt || !h) t.push_back(triplet<T>(run,i,1));
-         else if (i<h->GetNbinsX()) t.push_back(triplet<T>(run,i,h->GetBinContent(i+1)));
+      for (int i=lumistart; i<=lumiend; i+=rebin) {
+         int rebin2 = (i+rebin<=lumiend+1) ? rebin : lumiend-i;
+         if (docnt || !h) t.push_back(triplet<T>(run,i,lumifactor>0 ? 1 : rebin2));
+         else if (i<h->GetNbinsX()) t.push_back(triplet<T>(run,i,h->Integral(i+1,i+rebin2)));
          else t.push_back(triplet<T>(run,i,0));
       }
    }
@@ -459,4 +474,29 @@ TH1F* makehist(const char* name, vector<tripletI> v, vector<tripletI> v_aux, vec
    }
 
    return hist;
+}
+
+void extrapolate(TH1 *hist) {
+   int nbins = hist->GetNbinsX();
+   for (int i=1; i<nbins; i++) {
+      if (hist->GetBinContent(i)==0) {
+         // look for the closest non-zero bin
+         double k=-1., k1=-1.,k2=-1.;
+         for (int j=1; j<=5; j++) {
+            if (hist->GetBinContent(i-j)>0) {
+               k1 = hist->GetBinContent(i-j);
+            }
+            if (hist->GetBinContent(i+j)>0) {
+               k2 = hist->GetBinContent(i+j);
+            }
+            if (k1>0 && k2>0) {
+               k = (k1+k2)/2.;
+               break;
+            }
+         }
+         if (k>0) {
+            hist->SetBinContent(i,k);
+         }
+      }
+   }
 }
