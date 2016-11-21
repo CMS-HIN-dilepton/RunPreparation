@@ -26,6 +26,9 @@ This directory contains all the macros needed to study the different muon ID var
 
 This directory contains all the macros related to the production of plots and event displays for public display. Currently, it only has one directory for the macros used to produce the Yellow Plots.
 
+### DQM
+This directory contains code that runs on offline DQM files, to make a Z mass plot growing with time
+
 ## Trigger
 
 This directory contains all the macros related to trigger studies. It is currently divided in two directories:
