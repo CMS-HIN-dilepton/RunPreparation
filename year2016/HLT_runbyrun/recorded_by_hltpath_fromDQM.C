@@ -489,11 +489,17 @@ TH1F* makehist(const char* name, vector<tripletI> v, vector<tripletI> v_aux, vec
 }
 
 TH1F* makehist_lumi(vector<tripletD> v, map<pair<int,int>,int> themap) {
+   cout << __LINE__ << endl;
    TH1F *hist = NULL;
+   cout << __LINE__ << endl;
    if (!nooutput) hist = new TH1F("lumi","lumi",themap.size(),1,themap.size());
+   cout << __LINE__ << endl;
 
+   cout << __LINE__ << endl;
    set<int> runs;
+   cout << __LINE__ << endl;
 
+   cout << __LINE__ << endl;
    // fill the histogram
    if (hist) {
       for (int it=0; it<v.size(); it++) {
@@ -523,8 +529,10 @@ TH1F* makehist_lumi(vector<tripletD> v, map<pair<int,int>,int> themap) {
 
    // print the summary
    long double thesum = sum(v);
-   if (dotime || !dorate) hist->GetYaxis()->SetTitle("Int. lumi. [nb^{-1}]");
-   else hist->GetYaxis()->SetTitle("Inst. lumi. [nb^{-1}.s^{-1}]");
+   if (hist) {
+      if (dotime || !dorate) hist->GetYaxis()->SetTitle("Int. lumi. [nb^{-1}]");
+      else hist->GetYaxis()->SetTitle("Inst. lumi. [nb^{-1}.s^{-1}]");
+   }
    cout.precision(2);
    cout << "Integrated luminosity: " << "\t" << lumilength*thesum/1000. << " nb-1" << endl;
 
