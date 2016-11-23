@@ -78,10 +78,12 @@ lumirange json2lumi(const char *filename);
 string human(int num, bool doit);
 template<typename T> void fill(vector<triplet<T> > &t, TH1* h, int run, int lumistart, int lumiend, bool docnt=false);
 long long int sum(vector<tripletI> t);
+long double sum(vector<tripletD> t);
 long double sum(vector<tripletI> t, vector<tripletD> tlumi);
 set<pair<int,int> > makeset(map<string,vector<tripletI> > themap);
 map<pair<int,int>,int> makemap(set<pair<int,int> > theset);
-TH1F* makehist(const char* name, vector<tripletI> v, vector<tripletI> v_aux, vector<tripletD> v_ref, map<pair<int,int>,int> themap, bool dotime, bool dorate, bool doprescale, bool hum);
+TH1F* makehist(const char* name, vector<tripletI> v, vector<tripletI> v_aux, vector<tripletD> v_ref, map<pair<int,int>,int> themap, bool doprescale, bool hum);
+TH1F* makehist_lumi(vector<tripletD> v, map<pair<int,int>,int> themap);
 void extrapolate(TH1 *hist);
 
 
@@ -202,9 +204,11 @@ int main(int argc, const char** argv) {
    // associate a unique bin number to each (run,lumi) pair
    map<pair<int,int>,int> themap = makemap(theset);
 
+   makehist_lumi(v_ref, themap);
+
    map<string, vector<tripletI> >::iterator it_nLS = map_counts.begin();
    for (it_nLS = map_counts.begin(); it_nLS != map_counts.end(); it_nLS++) {
-      TH1F *hist = makehist(it_nLS->first.c_str(), it_nLS->second, map_counts_aux[it_nLS->first], v_ref, themap, dotime, dorate, theHlttype == "avg_prescale", hum);
+      TH1F *hist = makehist(it_nLS->first.c_str(), it_nLS->second, map_counts_aux[it_nLS->first], v_ref, themap, theHlttype == "avg_prescale", hum);
    }
 
 
@@ -231,6 +235,7 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
    TString tdirname = Form("DQMData/Run %i/HLT/Run summary/TriggerRates/",run) + TString(type);
    f->cd(tdirname);
    TProfile *hlumi = (TProfile*) f->Get(Form("DQMData/Run %i/HLT/Run summary/LumiMonitoring/lumiVsLS",run));
+   if (extrapol) extrapolate(hlumi);
 
    // if HLT: accept, error, pass L1 seed, pass prescaler, reject
 
@@ -268,10 +273,7 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
       }
    }
 
-   if (lumifactor>0 // do not fill the lumi vector if lumifactor<0
-         // && (!(cntref.size()>0 && cntref[cntref.size()-1].i0==run)) // do not fill the lumi vector twice for the same run
-         && doref
-         ) {
+   if (doref) {
       fill(cntref, hlumi, run, lumistart, lumiend);
    }
 
@@ -337,12 +339,12 @@ string human(int num, bool doit) {
 
 template<typename T> void fill(vector<triplet<T> > &t, TH1* h, int run, int lumistart, int lumiend, bool docnt) {
    if (nooutput) {
-      t.push_back(triplet<T>(run,lumistart,docnt ? lumiend-lumistart+1 : h->Integral(lumistart+1,lumiend+1)));
+      t.push_back(triplet<T>(run,lumistart,docnt ? lumiend-lumistart+1 : h->Integral(lumistart,lumiend)));
    } else {
       for (int i=lumistart; i<=lumiend; i+=rebin) {
-         int rebin2 = (i+rebin<=lumiend+1) ? rebin : lumiend-i;
+         int rebin2 = (i+rebin<=lumiend+1) ? rebin : lumiend-i+1;
          if (docnt || !h) t.push_back(triplet<T>(run,i,lumifactor>0 ? 1 : rebin2));
-         else if (i<h->GetNbinsX()) t.push_back(triplet<T>(run,i,h->Integral(i+1,i+rebin2)));
+         else if (i<h->GetNbinsX()) t.push_back(triplet<T>(run,i,h->Integral(i,i+rebin2-1)));
          else t.push_back(triplet<T>(run,i,0));
       }
    }
@@ -350,6 +352,16 @@ template<typename T> void fill(vector<triplet<T> > &t, TH1* h, int run, int lumi
 
 long long int sum(vector<tripletI> t) {
    long long int ans=0;
+
+   for (int i=0; i<t.size(); i++) {
+      ans += t[i].i2;
+   }
+
+   return ans;
+}
+
+long double sum(vector<tripletD> t) {
+   long double ans=0;
 
    for (int i=0; i<t.size(); i++) {
       ans += t[i].i2;
@@ -399,7 +411,7 @@ map<pair<int,int>,int> makemap(set<pair<int,int> > theset) {
    return ans;
 }
 
-TH1F* makehist(const char* name, vector<tripletI> v, vector<tripletI> v_aux, vector<tripletD> v_ref, map<pair<int,int>,int> themap, bool dotime, bool dorate, bool doprescale, bool hum) {
+TH1F* makehist(const char* name, vector<tripletI> v, vector<tripletI> v_aux, vector<tripletD> v_ref, map<pair<int,int>,int> themap, bool doprescale, bool hum) {
    TH1F *hist = NULL;
    if (!nooutput) hist = new TH1F(name,name,themap.size(),1,themap.size());
 
@@ -476,6 +488,49 @@ TH1F* makehist(const char* name, vector<tripletI> v, vector<tripletI> v_aux, vec
    return hist;
 }
 
+TH1F* makehist_lumi(vector<tripletD> v, map<pair<int,int>,int> themap) {
+   TH1F *hist = NULL;
+   if (!nooutput) hist = new TH1F("lumi","lumi",themap.size(),1,themap.size());
+
+   set<int> runs;
+
+   // fill the histogram
+   if (hist) {
+      for (int it=0; it<v.size(); it++) {
+         int i = themap[pair<int,int>(v[it].i0,v[it].i1)];
+         double n = v[it].i2/1000.;
+         double nint = n*lumilength + hist->GetBinContent(i-1);
+         double content,error;
+         if (dotime || !dorate) {
+            content = nint;
+            error = 0;
+         } else {
+            content = n/rebin;
+            error = 0;
+         }
+         hist->SetBinContent(i,content);
+         hist->SetBinError(i,error);
+
+         if (runs.find(v[it].i0)==runs.end()) {
+            // first time we see this run: label the axis
+            hist->GetXaxis()->SetBinLabel(i,Form("%i",v[it].i0));
+            runs.insert(v[it].i0);
+         } else {
+            hist->GetXaxis()->SetBinLabel(i,"");
+         }
+      }
+   }
+
+   // print the summary
+   long double thesum = sum(v);
+   if (dotime || !dorate) hist->GetYaxis()->SetTitle("Int. lumi. [nb^{-1}]");
+   else hist->GetYaxis()->SetTitle("Inst. lumi. [nb^{-1}.s^{-1}]");
+   cout.precision(2);
+   cout << "Integrated luminosity: " << "\t" << lumilength*thesum/1000. << " nb-1" << endl;
+
+   return hist;
+}
+
 void extrapolate(TH1 *hist) {
    int nbins = hist->GetNbinsX();
    for (int i=1; i<nbins; i++) {
@@ -495,7 +550,9 @@ void extrapolate(TH1 *hist) {
             }
          }
          if (k>0) {
+            hist->Fill(hist->GetBinCenter(i),k);
             hist->SetBinContent(i,k);
+            hist->SetBinError(i,(k1-k2)/2.);
          }
       }
    }
