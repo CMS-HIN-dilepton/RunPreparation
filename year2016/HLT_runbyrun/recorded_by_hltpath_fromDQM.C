@@ -489,17 +489,11 @@ TH1F* makehist(const char* name, vector<tripletI> v, vector<tripletI> v_aux, vec
 }
 
 TH1F* makehist_lumi(vector<tripletD> v, map<pair<int,int>,int> themap) {
-   cout << __LINE__ << endl;
    TH1F *hist = NULL;
-   cout << __LINE__ << endl;
    if (!nooutput) hist = new TH1F("lumi","lumi",themap.size(),1,themap.size());
-   cout << __LINE__ << endl;
 
-   cout << __LINE__ << endl;
    set<int> runs;
-   cout << __LINE__ << endl;
 
-   cout << __LINE__ << endl;
    // fill the histogram
    if (hist) {
       for (int it=0; it<v.size(); it++) {

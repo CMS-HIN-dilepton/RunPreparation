@@ -79,7 +79,7 @@ void plothists(const char* filename)
    TH1F *lumi = (TH1F*) f->Get("lumi");
 
    //scale lumi to the pad coordinates
-   Float_t rightmax = 1.1*lumi->GetMaximum();
+   Float_t rightmax = 1.2*lumi->GetMaximum();
    Float_t scale = gPad->GetUymax()/rightmax;
    lumi->SetLineColor(kYellow+1);
    lumi->SetFillColor(kYellow+1);
@@ -101,8 +101,10 @@ void plothists(const char* filename)
 
    TLegend *tleg = new TLegend(0.13,0.49,0.49,0.87);
    tleg->SetBorderSize(0);
+   tleg->AddEntry(lumi,"Luminosity","f");
    for (int i=0; i<hists.size(); i++) tleg->AddEntry(hists[i],hists[i]->GetName(),"l");
    tleg->Draw();
 
    c1->SaveAs("plot.pdf");
+   c1->SaveAs("plot.root");
 }
