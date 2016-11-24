@@ -3,7 +3,10 @@
 #include "TStyle.h"
 #include "TH1.h"
 #include "TGaxis.h"
-#include "TRandom.h"
+#include "TLegend.h"
+#include <vector>
+
+using namespace std;
 
 void plothists(const char* filename)
 {
@@ -101,6 +104,8 @@ void plothists(const char* filename)
 
    TLegend *tleg = new TLegend(0.13,0.49,0.49,0.87);
    tleg->SetBorderSize(0);
+   tleg->SetFillStyle(0);
+   tleg->SetTextSize(0.04);
    tleg->AddEntry(lumi,"Luminosity","f");
    for (int i=0; i<hists.size(); i++) tleg->AddEntry(hists[i],hists[i]->GetName(),"l");
    tleg->Draw();
