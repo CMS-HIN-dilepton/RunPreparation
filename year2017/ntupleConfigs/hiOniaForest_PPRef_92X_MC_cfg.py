@@ -13,19 +13,13 @@ muonSelection  = "Trk"    # Single muon selection: Glb(isGlobal), GlbTrk(isGloba
 
 triggerList    = {
     # Double Muon Trigger List
-#    'DoubleMuonTrigger' : cms.vstring("HLT_PAL1DoubleMuOpen_v1",
-#                                      "HLT_PAL1DoubleMuOpen_OS_v1"),
     'DoubleMuonTrigger' : cms.vstring(),
     # Double Muon Filter List
-    'DoubleMuonFilter'  : cms.vstring("hltL1fL1sDoubleMuOpenBptxANDL1Filtered0",
-                                      "hltL1fL1sDoubleMuOpenOSBptxANDL1Filtered0"),
+    'DoubleMuonFilter'  : cms.vstring(),
     # Double Muon Trigger List
-#    'SingleMuonTrigger' : cms.vstring("HLT_PAL1SingleMuOpen_v1",
-#                                      "HLT_PAL1SingleMuOpen_OS_v1"),
     'SingleMuonTrigger' : cms.vstring(),
     # Single Muon Filter List
-    'SingleMuonFilter'  : cms.vstring("hltL1fL1sSingleMuOpenBptxANDL1Filtered0",
-                                      "hltL1fL1sSingleMuOpenOSBptxANDL1Filtered0")
+    'SingleMuonFilter'  : cms.vstring(),
     }
 
 if isMC:
