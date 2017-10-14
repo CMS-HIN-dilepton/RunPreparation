@@ -7,8 +7,7 @@ import FWCore.ParameterSet.VarParsing as VarParsing
 # Setup Settings for ONIA FOREST:
 
 HLTProcess     = "HLT"    # Name of HLT process 
-#isMC           = True     # if input is MONTECARLO: True or if it's DATA: False
-isMC           = False     # if input is MONTECARLO: True or if it's DATA: False
+isMC           = True     # if input is MONTECARLO: True or if it's DATA: False
 muonSelection  = "Trk"    # Single muon selection: Glb(isGlobal), GlbTrk(isGlobal&&isTracker), Trk(isTracker) are availale
 
 triggerList    = {
@@ -19,15 +18,13 @@ triggerList    = {
     # Double Muon Trigger List
     'SingleMuonTrigger' : cms.vstring(),
     # Single Muon Filter List
-    'SingleMuonFilter'  : cms.vstring(),
+    'SingleMuonFilter'  : cms.vstring()
     }
 
 if isMC:
-#    globalTag = 'auto:run2_mc'
-	globalTag = 'phase1_2017_realistic'
+    globalTag = '92X_upgrade2017_realistic_v11'
 else:
-#    globalTag = 'auto:run2_hlt'
-    globalTag = 'auto:run2_data_promptlike'
+    globalTag = '92X_dataRun2_PromptLike_v5'
 
 #----------------------------------------------------------------------------
 
@@ -41,10 +38,8 @@ options = VarParsing.VarParsing ('analysis')
 # Input and Output File Names
 options.outputFile = "OniaForest.root"
 options.secondaryOutputFile = "Jpsi_DataSet.root"
-#options.inputFiles =  'file:/afs/cern.ch/work/e/echapon/public/RunPrep2017/step3_gunJpsi_RAW2DIGI_L1Reco_RECO.root'
-#options.inputFiles =  '/store/data/Run2017C/DoubleMuon/AOD/PromptReco-v2/000/300/079/00000/60A3189C-1477-E711-94A8-02163E01A54D.root'
-options.inputFiles =  '/store/data/Run2017C/SingleMuon/AOD/PromptReco-v2/000/300/079/00000/56C762D5-0877-E711-9CE2-02163E0141C5.root'
-#options.inputFiles = '/store/relval/CMSSW_9_2_12/RelValZMM_13/GEN-SIM-RECO/PU25ns_92X_upgrade2017_realistic_v11-v1/00000/32D2F2F0-E59D-E711-BCFF-0025905B85DE.root'
+options.inputFiles = '/store/user/gsfs/Pythia8_JPsiGun_pp_5020GeV/RECO__201711010/171011_011033/0000/step3_pp_RAW2DIGI_L1Reco_RECO_1.root'
+options.secondaryInputFiles = '/store/user/gsfs/Pythia8_JPsiGun_pp_5020GeV/RAW_20171010/171010_124128/0000/step2_pp_DIGI_L1_DIGI2RAW_HLT_1.root'
 options.maxEvents = -1 # -1 means all events
 
 # Get and parse the command line arguments
@@ -106,11 +101,12 @@ process.hltObjectAna = cms.EndPath(process.hltobject)
 
 #Options:
 process.source    = cms.Source("PoolSource",
-                               fileNames = cms.untracked.vstring( options.inputFiles )
+                               fileNames = cms.untracked.vstring( options.inputFiles ),
+                               secondaryFileNames = cms.untracked.vstring( options.secondaryInputFiles )
                                )
 process.TFileService = cms.Service("TFileService", 
                                    fileName = cms.string( options.outputFile )
                                    )
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(options.maxEvents) )
 process.options   = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
-process.schedule  = cms.Schedule( process.oniaTreeAna , process.hltBitAna , process.hltObjectAna )
+process.schedule = cms.Schedule( process.oniaTreeAna , process.hltBitAna , process.hltObjectAna )

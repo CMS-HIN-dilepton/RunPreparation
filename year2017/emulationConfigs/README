@@ -1,0 +1,24 @@
+Saving output RAWAODSIM
+https://twiki.cern.ch/twiki/bin/view/CMS/MuonTurnOn2016#Save_the_output_RAW
+
+process.load('Configuration.EventContent.EventContent_cff')
+
+outputCommands = process.RAWAODSIMEventContent.outputCommands.extend(
+    cms.untracked.vstring(
+        "drop FEDRawDataCollection_rawDataCollector_*_*",
+        "keep FEDRawDataCollection_rawDataCollector_*_MYHLT"
+        )
+    )
+process.RAWAODSIMoutput = cms.OutputModule("PoolOutputModule",
+    dataset = cms.untracked.PSet(
+        dataTier = cms.untracked.string('RAWAODSIM'),
+        filterName = cms.untracked.string('')
+    ),
+    eventAutoFlushCompressedSize=cms.untracked.int32(5*1024*1024),
+    fileName = cms.untracked.string('file:step3_PAHLT.root'),
+    outputCommands = process.RAWAODSIMEventContent.outputCommands,
+    compressionLevel=cms.untracked.int32(7),
+    splitLevel = cms.untracked.int32(0)
+)
+
+process.HLTOutput = cms.EndPath( process.RAWAODSIMoutput )
