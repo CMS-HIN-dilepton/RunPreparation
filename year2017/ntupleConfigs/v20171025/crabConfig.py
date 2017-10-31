@@ -3,9 +3,9 @@
 from CRABClient.UserUtilities import config
 config = config()
 config.General.transferOutputs = True
-config.General.requestName = '2017pp502_Onia_20171031'
+config.General.requestName = '2017pp502_Onia_20171025'
 
-config.General.workArea = 'crab_projects_PrJPsi_pp'
+#config.General.workArea = 'crab_projects_PrJPsi_pp'
 #config.General.workArea = 'crab_projects_NonPrJPsi_pp'
 #config.General.workArea = 'crab_projects_JPsiGun_pp'
 #config.General.workArea = 'crab_projects_MuGun_pp'
@@ -19,7 +19,7 @@ config.JobType.pluginName = 'Analysis'
 #config.JobType.numCores = 4
 config.JobType.maxMemoryMB = 4000
 
-config.Data.inputDataset = '/Pythia8_PrJPsi_pp_CUETP8M1_5020GeV/twang-crab_2017pp502_muHLTemulation_20171025-e4ed28ee23e9818f2ed2dda59a3e4582/USER'
+#config.Data.inputDataset = '/Pythia8_PrJPsi_pp_CUETP8M1_5020GeV/twang-crab_2017pp502_muHLTemulation_20171025-e4ed28ee23e9818f2ed2dda59a3e4582/USER'
 #config.Data.inputDataset = '/Pythia8_NonPrJPsi_pp_CUETP8M1_5020GeV/twang-crab_2017pp502_muHLTemulation_20171025-e4ed28ee23e9818f2ed2dda59a3e4582/USER'
 #config.Data.inputDataset = '/Pythia8_JPsiGun_pp_5020GeV/twang-crab_2017pp502_muHLTemulation_20171025-e4ed28ee23e9818f2ed2dda59a3e4582/USER'
 #config.Data.inputDataset = '/Pythia8_MuGun_pp_5020GeV/twang-crab_2017pp502_muHLTemulation_20171025-e4ed28ee23e9818f2ed2dda59a3e4582/USER'
