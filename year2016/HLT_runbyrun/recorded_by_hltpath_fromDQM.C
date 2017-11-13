@@ -239,14 +239,33 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
 
    // if HLT: accept, error, pass L1 seed, pass prescaler, reject
 
-   TIter next(gDirectory->GetListOfKeys());
+   TCollection *allkeys = gDirectory->GetListOfKeys();
+   TIter next(allkeys);
    TKey *key;
+   vector<TH1*> hists;
+
+   // there is a subdirectory structure for HLT. so we need to make the full lists of histos in the top directory but also the subdirectories
    while ((key = (TKey*)next())) {
       TClass *cl = gROOT->GetClass(key->GetClassName());
       
-      // it must be an histogram
-      if (!cl->InheritsFrom("TH1")) continue;
-      TH1 *h = (TH1*)key->ReadObj();
+      // add the contents of the subdirs
+      if (cl->InheritsFrom("TDirectory")) {
+         TDirectory *tmpdir = (TDirectory*) key->ReadObj();
+         TIter next2(tmpdir->GetListOfKeys());
+         TKey *key2;
+         while ((key2 = (TKey*)next2())) {
+            TClass *cl2 = gROOT->GetClass(key2->GetClassName());
+            // if this is not an histo, skip the key
+            if (!cl2->InheritsFrom("TH1")) continue;
+            hists.push_back((TH1*)key2->ReadObj());
+         }
+      } else if (cl->InheritsFrom("TH1")) hists.push_back((TH1*)key->ReadObj());
+      else continue;
+   } // loop on the directory contents
+
+   // now loop over the full list of  histos
+   for (int i=0; i<hists.size(); i++) {
+      TH1* h = hists[i];
 
       // the name must match one of the requested patterns
       bool match=false; TString hname(h->GetName());
@@ -271,7 +290,7 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
             fill(cnt[thepath.Data()], h, run, lumistart, lumiend, docnt);
          }
       }
-   }
+   } // loop over histos
 
    if (doref) {
       fill(cntref, hlumi, run, lumistart, lumiend);
@@ -339,7 +358,7 @@ string human(int num, bool doit) {
 
 template<typename T> void fill(vector<triplet<T> > &t, TH1* h, int run, int lumistart, int lumiend, bool docnt) {
    if (nooutput) {
-      t.push_back(triplet<T>(run,lumistart,docnt ? lumiend-lumistart+1 : h->Integral(lumistart,lumiend)));
+      t.push_back(triplet<T>(run,lumistart,docnt || !h ? lumiend-lumistart+1 : h->Integral(lumistart,lumiend)));
    } else {
       for (int i=lumistart; i<=lumiend; i+=rebin) {
          int rebin2 = (i+rebin<=lumiend+1) ? rebin : lumiend-i+1;
@@ -527,13 +546,14 @@ TH1F* makehist_lumi(vector<tripletD> v, map<pair<int,int>,int> themap) {
       if (dotime || !dorate) hist->GetYaxis()->SetTitle("Int. lumi. [nb^{-1}]");
       else hist->GetYaxis()->SetTitle("Inst. lumi. [nb^{-1}.s^{-1}]");
    }
-   cout.precision(2);
+   cout.precision(3);
    cout << "Integrated luminosity: " << "\t" << lumilength*thesum/1000. << " nb-1" << endl;
 
    return hist;
 }
 
 void extrapolate(TH1 *hist) {
+   if (!hist) return;
    int nbins = hist->GetNbinsX();
    for (int i=1; i<nbins; i++) {
       if (hist->GetBinContent(i)==0) {
