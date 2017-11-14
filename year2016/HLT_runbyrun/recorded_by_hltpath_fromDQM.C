@@ -176,6 +176,9 @@ int main(int argc, const char** argv) {
    // for each run, count events
    for (lumirange::iterator it = lumis.begin(); it != lumis.end(); it++) {
       if (it->first<minrun || it->first>maxrun) continue;
+      if (it->second.second>2500) {
+         cout << "Warning, this range " << it->first << ":" << it->second.first << "," << it->second.second << " goes beyond LS=2500. LS beyond 2500 are not stored in DQM." << endl;
+      }
 
       if (dorate) {
          counts(it->first, it->second.first, it->second.second, theType, map_counts, v_ref, theHlttype, false, true);
@@ -251,6 +254,8 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
       // add the contents of the subdirs
       if (cl->InheritsFrom("TDirectory")) {
          TDirectory *tmpdir = (TDirectory*) key->ReadObj();
+         if (TString(tmpdir->GetName())=="OnlineMonitor") continue;
+         
          TIter next2(tmpdir->GetListOfKeys());
          TKey *key2;
          while ((key2 = (TKey*)next2())) {
