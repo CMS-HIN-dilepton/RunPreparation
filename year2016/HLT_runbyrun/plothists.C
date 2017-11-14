@@ -22,6 +22,7 @@ void plothists(const char* filename)
    gStyle->SetTitleYSize(0.06);
    gStyle->SetLabelSize(0.08);
    gStyle->SetLabelSize(0.05,"X");
+   gStyle->SetOptTitle(0);
    gStyle->cd();
 
    TCanvas *c1 = new TCanvas("c1","hists with different scales",600,400);
@@ -106,7 +107,8 @@ void plothists(const char* filename)
    tleg->SetBorderSize(0);
    tleg->SetFillStyle(0);
    tleg->SetTextSize(0.04);
-   tleg->AddEntry(lumi,"Luminosity","f");
+   if (TString(lumi->GetYaxis()->GetTitle()).Contains("lumi")) tleg->AddEntry(lumi,"Luminosity","f");
+   else tleg->AddEntry(lumi,"Pileup","f");
    for (int i=0; i<hists.size(); i++) tleg->AddEntry(hists[i],hists[i]->GetName(),"l");
    tleg->Draw();
 

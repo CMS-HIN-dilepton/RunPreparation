@@ -47,6 +47,7 @@ double magicfactor=magicfactor_5tev;
 bool   nooutput   = true;
 int    rebin      = 1;
 bool   extrapol   = false;
+bool   usePU      = false;
 
 // this structure is intended to contain a pair<run number, <lumi section start, lumi section stop>>
 typedef vector<pair<int,pair<int,int> > > lumirange;
@@ -112,6 +113,7 @@ int main(int argc, const char** argv) {
       cout << " --scalerate 1000: if >0, scale rates to this target collision rate (in Hz), using the online luminosity (default: " << lumifactor << ")" << endl;
       cout << " --pattern pattern1,pattern2,...: comma-separated list of patterns to match to paths (in the format of TRegexp) (default: " << pattern << ")" << endl;
       cout << " --extrapolate: correct for missing lumi sections" << endl;
+      cout << " --usePU: when using --rate, keep track of pileup instead of instantaneous luminosity" << endl;
       cout << endl;
       cout << "See also https://twiki.cern.ch/twiki/bin/view/CMS/HITriggerTool for more information." << endl;
       return 1;
@@ -138,6 +140,7 @@ int main(int argc, const char** argv) {
       else if (arg=="--scalerate"&&argc>i+1) {i++; lumifactor = magicfactor*atof(argv[i]);}
       else if (arg=="--pattern"&&argc>i+1) {i++; pattern = argv[i];}
       else if (arg=="--extrapolate") {extrapol = true;}
+      else if (arg=="--usePU") {usePU = true;}
       else cout << "Unsupported option " << argv[i] << endl;
    }
 
@@ -196,10 +199,11 @@ int main(int argc, const char** argv) {
    TFile *f = NULL;
    if (!nooutput) f = new TFile(outputfile.c_str(), "RECREATE");
 
-   cout << "HLT path\t\t" << theType;
+   cout << theType;
    if (theType == "HLT") cout << ":" << theHlttype;
    if (dotime) cout << ": running time [s]";
-   if (dorate) cout << ": average rate [Hz]";
+   else if (dorate) cout << ": average rate [Hz]";
+   else cout << ": Nb. of events";
    cout << endl;
 
    // create std::set of pairs of (run,lumi)
@@ -238,6 +242,7 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
    TString tdirname = Form("DQMData/Run %i/HLT/Run summary/TriggerRates/",run) + TString(type);
    f->cd(tdirname);
    TProfile *hlumi = (TProfile*) f->Get(Form("DQMData/Run %i/HLT/Run summary/LumiMonitoring/lumiVsLS",run));
+   if (usePU && dorate) hlumi = (TProfile*) f->Get(Form("DQMData/Run %i/HLT/Run summary/LumiMonitoring/puVsLS",run));
    if (extrapol) extrapolate(hlumi);
 
    // if HLT: accept, error, pass L1 seed, pass prescaler, reject
@@ -254,7 +259,7 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
       // add the contents of the subdirs
       if (cl->InheritsFrom("TDirectory")) {
          TDirectory *tmpdir = (TDirectory*) key->ReadObj();
-         if (TString(tmpdir->GetName())=="OnlineMonitor") continue;
+         if (TString(type)=="HLT" && TString(tmpdir->GetName())=="OnlineMonitor") continue;
          
          TIter next2(tmpdir->GetListOfKeys());
          TKey *key2;
@@ -522,7 +527,8 @@ TH1F* makehist_lumi(vector<tripletD> v, map<pair<int,int>,int> themap) {
    if (hist) {
       for (int it=0; it<v.size(); it++) {
          int i = themap[pair<int,int>(v[it].i0,v[it].i1)];
-         double n = v[it].i2/1000.;
+         double n = v[it].i2;
+         if (!usePU) n = n/1000.;
          double nint = n*lumilength + hist->GetBinContent(i-1);
          double content,error;
          if (dotime || !dorate) {
@@ -549,10 +555,11 @@ TH1F* makehist_lumi(vector<tripletD> v, map<pair<int,int>,int> themap) {
    long double thesum = sum(v);
    if (hist) {
       if (dotime || !dorate) hist->GetYaxis()->SetTitle("Int. lumi. [nb^{-1}]");
-      else hist->GetYaxis()->SetTitle("Inst. lumi. [nb^{-1}.s^{-1}]");
+      else if (!usePU) hist->GetYaxis()->SetTitle("Inst. lumi. [nb^{-1}.s^{-1}]");
+      else hist->GetYaxis()->SetTitle("Average pileup");
    }
    cout.precision(3);
-   cout << "Integrated luminosity: " << "\t" << lumilength*thesum/1000. << " nb-1" << endl;
+   if (!usePU) cout << "Integrated luminosity: " << "\t" << lumilength*thesum/1000. << " nb-1" << endl;
 
    return hist;
 }
