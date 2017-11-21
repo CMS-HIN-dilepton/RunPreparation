@@ -22,6 +22,7 @@ using namespace std;
 using boost::property_tree::ptree;
 
 const double lumilength = 23.31;
+const int lumimax = 2501; // lumi sections above 2500 are not stored in DQM
 
 // default directory for DQM files. You can find these files in https://cmsweb.cern.ch/dqm/online/data/browse/Original/00026xxxx/0002630xx/ and similar URLs.
 TString basedir = "/afs/cern.ch/user/e/echapon/workspace/public/RunPrep2016/HLT_runbyrun/DQMfiles";
@@ -70,7 +71,7 @@ template <typename T> class triplet {
       }
 };
 
-typedef triplet<int> tripletI;
+typedef triplet<long int> tripletI;
 typedef triplet<double> tripletD;
 
 // declaration of helper functions
@@ -179,8 +180,9 @@ int main(int argc, const char** argv) {
    // for each run, count events
    for (lumirange::iterator it = lumis.begin(); it != lumis.end(); it++) {
       if (it->first<minrun || it->first>maxrun) continue;
-      if (it->second.second>2500) {
-         cout << "Warning, this range " << it->first << ":" << it->second.first << "," << it->second.second << " goes beyond LS=2500. LS beyond 2500 are not stored in DQM." << endl;
+      if (it->second.second>=lumimax) { // print a warning if the range goes beyond 2500
+         cout << "Warning, this range " << it->first << ":" << it->second.first << "," << it->second.second << " goes beyond LS=" << lumimax-1;
+         cout << ". LS beyond "<< lumimax-1 << " are not stored in DQM." << endl;
       }
 
       if (dorate) {
@@ -286,6 +288,11 @@ void counts(int run, int lumistart, int lumiend, string type, map<string,vector<
          }
       }
       if (!match) continue;
+
+      // protection against going beyond the histo range (usually 2500LS)
+      // int lumimax = h->GetNbinsX();
+      if (lumiend>lumimax) lumiend=lumimax;
+      if (lumistart>lumimax) lumistart=lumimax;
 
       int nlumis = (lumiend+1-lumistart);
 
