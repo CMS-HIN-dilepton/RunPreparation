@@ -540,13 +540,6 @@ string trig_v30 [] =
        triggerIndex_PP = i;
      }
  }
- else {
-   int nTrig = sizeof(trig_v1417)/sizeof(trig_v1417[0]);
-   for (int i=0; i<nTrig; i++)
-     if (trigLabel.find(trig_v1417[i])!=std::string::npos && trig_v1417[i].find(trigLabel)!=std::string::npos) {
-       triggerIndex_PP = i;
-     }
- }
  cout<<"[INFO] Calculating efficiency for trigger "<<trigLabel<<" with index "<<triggerIndex_PP<< " from tree "<<treeLabel<<endl;
   //Double_t ptbins []={0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 24, 27, 30};
  Double_t ptbins []= {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12.5, 15, 17.5, 20, 22.5, 25, 30, 35, 40, 50, 60, 70, 80, 100};
