@@ -1,5 +1,5 @@
-#ifndef makeTrigEff_h
-#define makeTrigEff_h
+#ifndef makeTrigEff_HLTbitanalyzer_h
+#define makeTrigEff_HLTbitanalyzer_h
 
 #include "TSystem.h"
 #include <TROOT.h>
@@ -109,6 +109,81 @@ class oniaTree {
   Float_t         Reco_QQ_mupl_ptErr_global[99];   //[Reco_QQ_size]                                                                                                                                    
   Float_t         Reco_QQ_mumi_ptErr_global[99];   //[Reco_QQ_size]
 
+  Int_t           HLT_HIL1DoubleMuOpen_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMuOpen_Centrality_30_100_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_Centrality_30_100_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMuOpen_Centrality_40_100_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_Centrality_40_100_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMuOpen_Centrality_50_100_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_Centrality_50_100_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMuOpen_MAXdR2p0_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_MAXdR2p0_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMuOpen_MAXdR3p5_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_MAXdR3p5_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMuOpen_OS_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_OS_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMuOpen_SS_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_SS_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMuOpen_er1p6_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_er1p6_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMuOpen_OS_er1p6_v1;
+  Int_t           HLT_HIL1DoubleMuOpen_OS_er1p6_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMu0_v1;
+  Int_t           HLT_HIL1DoubleMu0_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMu2_v1;
+  Int_t           HLT_HIL1DoubleMu2_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMu2p5_v1;
+  Int_t           HLT_HIL1DoubleMu2p5_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMu3_v1;
+  Int_t           HLT_HIL1DoubleMu3_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMu2_OS_v1;
+  Int_t           HLT_HIL1DoubleMu2_OS_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMu3_OS_v1;
+  Int_t           HLT_HIL1DoubleMu3_OS_v1_Prescl;
+  Int_t           HLT_HIL1DoubleMu10_v1;
+  Int_t           HLT_HIL1DoubleMu10_v1_Prescl;
+  Int_t           HLT_HIL2_L1DoubleMu10_v1;
+  Int_t           HLT_HIL2_L1DoubleMu10_v1_Prescl;
+  Int_t           HLT_HIL3_L1DoubleMu10_v1;
+  Int_t           HLT_HIL3_L1DoubleMu10_v1_Prescl;
+  Int_t           HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1;
+  Int_t           HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1_Prescl;
+  Int_t           HLT_HIL2DoubleMuOpen_v1;
+  Int_t           HLT_HIL2DoubleMuOpen_v1_Prescl;
+  Int_t           HLT_HIL3DoubleMuOpen_v1;
+  Int_t           HLT_HIL3DoubleMuOpen_v1_Prescl;
+  Int_t           HLT_HIL3DoubleMuOpen_M60120_v1;
+  Int_t           HLT_HIL3DoubleMuOpen_M60120_v1_Prescl;
+  Int_t           HLT_HIL3DoubleMuOpen_Jpsi_v1;
+  Int_t           HLT_HIL3DoubleMuOpen_Jpsi_v1_Prescl;
+  Int_t           HLT_HIL3DoubleMuOpen_Upsi_v1;
+  Int_t           HLT_HIL3DoubleMuOpen_Upsi_v1_Prescl;
+  Int_t           HLT_HIL3Mu0_L2Mu0_v1;
+  Int_t           HLT_HIL3Mu0_L2Mu0_v1_Prescl;
+  Int_t           HLT_HIL3Mu0_L2Mu0_testignore_v1;
+  Int_t           HLT_HIL3Mu0_L2Mu0_testignore_v1_Prescl;
+  Int_t           HLT_HIL3Mu2_L2Mu0_v1;
+  Int_t           HLT_HIL3Mu2_L2Mu0_v1_Prescl;
+  Int_t           HLT_HIL3Mu2p5_L2Mu0_v1;
+  Int_t           HLT_HIL3Mu2p5_L2Mu0_v1_Prescl;
+  Int_t           HLT_HIL3Mu3_L2Mu0_v1;
+  Int_t           HLT_HIL3Mu3_L2Mu0_v1_Prescl;
+  Int_t           HLT_HIL3Mu2p5_L1DoubleMu0_v1;
+  Int_t           HLT_HIL3Mu2p5_L1DoubleMu0_v1_Prescl;
+  Int_t           HLT_HIL3Mu3_L1DoubleMuOpen_v1;
+  Int_t           HLT_HIL3Mu3_L1DoubleMuOpen_v1_Prescl;
+  Int_t           HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1;
+  Int_t           HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1_Prescl;
+  Int_t           HLT_HIL3Mu3_L1DoubleMu0_v1;
+  Int_t           HLT_HIL3Mu3_L1DoubleMu0_v1_Prescl;
+  Int_t           HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1;
+  Int_t           HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1_Prescl;
+  Int_t           HLT_HIL3Mu3_L1TripleMuOpen_v1;
+  Int_t           HLT_HIL3Mu3_L1TripleMuOpen_v1_Prescl;
+
 
   TBranch        *b_eventNb;   //!                                                                                                                                                                     
   TBranch        *b_runNb;   //!                                                                                                      
@@ -179,6 +254,81 @@ class oniaTree {
   TBranch        *b_Reco_QQ_mupl_ptErr_global;   //!                                                                                                                                                   
   TBranch        *b_Reco_QQ_mumi_ptErr_global;   //!
 
+  TBranch        *b_HLT_HIL1DoubleMuOpen_v1;   //!                                                                                                                                                     
+  TBranch        *b_HLT_HIL1DoubleMuOpen_v1_Prescl;   //!                                                                                                                                              
+  TBranch        *b_HLT_HIL1DoubleMuOpen_Centrality_30_100_v1;   //!                                                                                                                                   
+  TBranch        *b_HLT_HIL1DoubleMuOpen_Centrality_30_100_v1_Prescl;   //!                                                                                                                            
+  TBranch        *b_HLT_HIL1DoubleMuOpen_Centrality_40_100_v1;   //!                                                                                                                                   
+  TBranch        *b_HLT_HIL1DoubleMuOpen_Centrality_40_100_v1_Prescl;   //!                                                                                                                            
+  TBranch        *b_HLT_HIL1DoubleMuOpen_Centrality_50_100_v1;   //!                                                                                                                                   
+  TBranch        *b_HLT_HIL1DoubleMuOpen_Centrality_50_100_v1_Prescl;   //!                                                                                                                            
+  TBranch        *b_HLT_HIL1DoubleMuOpen_MAXdR2p0_v1;   //!                                                                                                                                            
+  TBranch        *b_HLT_HIL1DoubleMuOpen_MAXdR2p0_v1_Prescl;   //!                                                                                                                                     
+  TBranch        *b_HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1;   //!                                                                                                                                         
+  TBranch        *b_HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1_Prescl;   //!                                                                                                                                  
+  TBranch        *b_HLT_HIL1DoubleMuOpen_MAXdR3p5_v1;   //!                                                                                                                                            
+  TBranch        *b_HLT_HIL1DoubleMuOpen_MAXdR3p5_v1_Prescl;   //!                                                                                                                                     
+  TBranch        *b_HLT_HIL1DoubleMuOpen_OS_v1;   //!                                                                                                                                                  
+  TBranch        *b_HLT_HIL1DoubleMuOpen_OS_v1_Prescl;   //!                                                                                                                                           
+  TBranch        *b_HLT_HIL1DoubleMuOpen_SS_v1;   //!                                                                                                                                                  
+  TBranch        *b_HLT_HIL1DoubleMuOpen_SS_v1_Prescl;   //!                                                                                                                                           
+  TBranch        *b_HLT_HIL1DoubleMuOpen_er1p6_v1;   //!                                                                                                                                               
+  TBranch        *b_HLT_HIL1DoubleMuOpen_er1p6_v1_Prescl;   //!                                                                                                                                        
+  TBranch        *b_HLT_HIL1DoubleMuOpen_OS_er1p6_v1;   //!                                                                                                                                            
+  TBranch        *b_HLT_HIL1DoubleMuOpen_OS_er1p6_v1_Prescl;   //!                                                          
+  TBranch        *b_HLT_HIL1DoubleMu0_v1;   //!                                                                                                                                                        
+  TBranch        *b_HLT_HIL1DoubleMu0_v1_Prescl;   //!                                                                                                                                                 
+  TBranch        *b_HLT_HIL1DoubleMu2_v1;   //!                                                                                                                                                        
+  TBranch        *b_HLT_HIL1DoubleMu2_v1_Prescl;   //!                                                                                                                                                 
+  TBranch        *b_HLT_HIL1DoubleMu2p5_v1;   //!                                                                                                                                                      
+  TBranch        *b_HLT_HIL1DoubleMu2p5_v1_Prescl;   //!                                                                                                                                               
+  TBranch        *b_HLT_HIL1DoubleMu3_v1;   //!                                                                                                                                                        
+  TBranch        *b_HLT_HIL1DoubleMu3_v1_Prescl;   //!                                                                                                                                                 
+  TBranch        *b_HLT_HIL1DoubleMu2_OS_v1;   //!                                                                                                                                                     
+  TBranch        *b_HLT_HIL1DoubleMu2_OS_v1_Prescl;   //!                                                                                                                                              
+  TBranch        *b_HLT_HIL1DoubleMu3_OS_v1;   //!                                                                                                                                                     
+  TBranch        *b_HLT_HIL1DoubleMu3_OS_v1_Prescl;   //!                                                                                                                                              
+  TBranch        *b_HLT_HIL1DoubleMu10_v1;   //!                                                                                                                                                       
+  TBranch        *b_HLT_HIL1DoubleMu10_v1_Prescl;   //!                                                                                                                                                
+  TBranch        *b_HLT_HIL2_L1DoubleMu10_v1;   //!                                                                                                                                                    
+  TBranch        *b_HLT_HIL2_L1DoubleMu10_v1_Prescl;   //!                                                                                                                                             
+  TBranch        *b_HLT_HIL3_L1DoubleMu10_v1;   //!                                                                                                                                                    
+  TBranch        *b_HLT_HIL3_L1DoubleMu10_v1_Prescl;   //!                                                                                                                                             
+  TBranch        *b_HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1;   //!                                                                                                                              
+  TBranch        *b_HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1_Prescl;   //!                                                                                                                       
+  TBranch        *b_HLT_HIL2DoubleMuOpen_v1;   //!                                                                                                                                                   
+  TBranch        *b_HLT_HIL2DoubleMuOpen_v1_Prescl;
+  TBranch        *b_HLT_HIL3DoubleMuOpen_v1;   //!                                                                                                                                                     
+  TBranch        *b_HLT_HIL3DoubleMuOpen_v1_Prescl;   //!                                                                                                                                              
+  TBranch        *b_HLT_HIL3DoubleMuOpen_M60120_v1;   //!                                                                                                                                              
+  TBranch        *b_HLT_HIL3DoubleMuOpen_M60120_v1_Prescl;   //!                                                                                                                                       
+  TBranch        *b_HLT_HIL3DoubleMuOpen_Jpsi_v1;   //!                                                                                                                                                
+  TBranch        *b_HLT_HIL3DoubleMuOpen_Jpsi_v1_Prescl;   //!                                                                                                                                         
+  TBranch        *b_HLT_HIL3DoubleMuOpen_Upsi_v1;   //!                                                                                                                                                
+  TBranch        *b_HLT_HIL3DoubleMuOpen_Upsi_v1_Prescl;   //!   
+  TBranch        *b_HLT_HIL3Mu0_L2Mu0_v1;   //!                                                                                                                                                        
+  TBranch        *b_HLT_HIL3Mu0_L2Mu0_v1_Prescl;   //!                                                                                                                                                 
+  TBranch        *b_HLT_HIL3Mu0_L2Mu0_testignore_v1;   //!                                                                                                                                             
+  TBranch        *b_HLT_HIL3Mu0_L2Mu0_testignore_v1_Prescl;   //!                                                                                                                                      
+  TBranch        *b_HLT_HIL3Mu2_L2Mu0_v1;   //!                                                                                                                                                        
+  TBranch        *b_HLT_HIL3Mu2_L2Mu0_v1_Prescl;   //!                                                                                                                                                 
+  TBranch        *b_HLT_HIL3Mu2p5_L2Mu0_v1;   //!                                                                                                                                                      
+  TBranch        *b_HLT_HIL3Mu2p5_L2Mu0_v1_Prescl;   //!                                                                                                                                               
+  TBranch        *b_HLT_HIL3Mu3_L2Mu0_v1;   //!                                                                                                                                                        
+  TBranch        *b_HLT_HIL3Mu3_L2Mu0_v1_Prescl;   //!      
+  TBranch        *b_HLT_HIL3Mu2p5_L1DoubleMu0_v1;   //!                                                                                                                                                
+  TBranch        *b_HLT_HIL3Mu2p5_L1DoubleMu0_v1_Prescl;   //!                                                                                                                                         
+  TBranch        *b_HLT_HIL3Mu3_L1DoubleMuOpen_v1;   //!                                                                                                                                               
+  TBranch        *b_HLT_HIL3Mu3_L1DoubleMuOpen_v1_Prescl;   //!                                                                                                                                        
+  TBranch        *b_HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1;   //!                                                                                                                                            
+  TBranch        *b_HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1_Prescl;   //!                                                                                                                                     
+  TBranch        *b_HLT_HIL3Mu3_L1DoubleMu0_v1;   //!                                                                                                                                                  
+  TBranch        *b_HLT_HIL3Mu3_L1DoubleMu0_v1_Prescl;   //!                                                                                                                                           
+  TBranch        *b_HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1;   //!                                                                                                                                        
+  TBranch        *b_HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1_Prescl;   //!                                                                                                                                 
+  TBranch        *b_HLT_HIL3Mu3_L1TripleMuOpen_v1;   //!                                                                                                                                               
+  TBranch        *b_HLT_HIL3Mu3_L1TripleMuOpen_v1_Prescl;   //!   
+
   oniaTree(string fileName = "");
   virtual ~oniaTree();
 
@@ -193,8 +343,6 @@ class oniaTree {
   virtual void     TrigEffCalc(string trigLabel = "");
   virtual void     AllEffCalc();
   virtual void     Plot(string inputName);
-  virtual void     Plot_v18MuOpen0();
-  virtual void     Plot_v1417MuOpen_withOptions();
   virtual int      color(int i);
   virtual void     plotAll();
   virtual Bool_t   isTriggerMatch (Int_t iRecoQQ, Int_t TriggerBit);
@@ -205,109 +353,39 @@ class oniaTree {
 };
 #endif
 
-#ifdef makeTrigEff_cxx
+#ifdef makeTrigEff_HLTbitanalyzer_cxx
 oniaTree::oniaTree(string fileName) : fChain(0)
 {
   TFile* f(0x0);
-  if (fileName.find("Pr")!=std::string::npos) {
-    f = TFile::Open("JpsiMM_0_15_OniaForest.root");
-    treeLabel = "TreeFromPrashant_sept6";
-  }
-  else if (fileName.find("JBv18all")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_0_15/Jpsi_015_Ntuple_HLT_v18_all.root");
-    treeLabel = "TreeFromJB_sept7_v18_all";
+  if (fileName.find("LowPtJpsi")!=std::string::npos){
+    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/HLT_v18/JpsiMM_0_15/ntuple_HLT_v18_lowpT_Jpsi/181010_210455/Oniatree_all.root");
+      treeLabel = "TreeFromGr_oct11_v18x2_LowPtJpsi";
     }
-  else if (fileName.find("JBv14special")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Ntuple_SpecialHLT_v14.root");
-    treeLabel = "TreeFromJB_sept7_v14_specialHLT";
+  else if (fileName.find("Z")!=std::string::npos){
+    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/HLT_v18/Zm10m10/ntuple_HLT_v18_Z/181011_102759/Oniatree_all.root");
+      treeLabel = "TreeFromGr_oct11_v18x2_Z";
   }
-  else if (fileName.find("JBv15special")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Ntuple_SpecialHLT_v15.root");
-    treeLabel = "TreeFromJB_sept7_v15_specialHLT";
+
+  else if (fileName.find("HighPtJpsi")!=std::string::npos){
+    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/HLT_v18/JpsiMM_15_40/ntuple_HLT_v18_Jpsi_highpT_DB/181011_184453/Oniatree_all.root");
+    treeLabel = "TreeFromGr_oct11_v18x2_HighPtJpsi";
   }
-  else if (fileName.find("JBv16special")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Ntuple_SpecialHLT_v16.root");
-    treeLabel = "TreeFromJB_sept7_v16_specialHLT";
-  }
-  else if (fileName.find("JBv17special")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Ntuple_SpecialHLT_v17.root");
-    treeLabel = "TreeFromJB_sept7_v17_specialHLT";
-  }
-  else if (fileName.find("JBv8fulltrk")!=std::string::npos){
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_0_15/Jpsi015_10_2_4_fulltrkv8_all.root");
-    treeLabel = "TreeFromJB_sept10_v8_fulltrk";
-  }
-  else if (fileName.find("HLTEMv16")!=std::string::npos){
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_0_15/Jpsi_015_10_1_10_L1v9_HLTv16_all.root ");
-    treeLabel = "TreeFromJB_HLTFromEM_sept11_v16";
-  }
-  else if (fileName.find("JBv26Upsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Ups1SMM_0_30/Upsi_L1v9_HLTnewL3v26_all.root");
-    treeLabel = "TreeFromJB_sept17_v26_Upsi";
-  }
-  else if (fileName.find("JBv26HighPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_15_40/Jpsi_1540_10_1_10_L1v9_HLTv26_all.root");
-    treeLabel = "TreeFromJB_sept17_v26_HighptJpsi";
-  }
-  else if (fileName.find("JBv26Z")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Zm10m10/Zm10_10_1_10_L1v9_HLTv26_all.root");
-    treeLabel = "TreeFromJB_sept17_v26_Z";
-  }
-  else if (fileName.find("JBv26")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_0_15/Jpsi_015_10_1_10_HLTnewL3v26_Dbl_all.root");
-    treeLabel = "TreeFromJB_sept17_v26";
-  }
-  else if (fileName.find("GrvX")!=std::string::npos) {
-    f = TFile::Open("/afs/cern.ch/user/g/gwaegel/work/public/hltdev/trees/OniaForest_CMSSW_10_3_0_pre5.root");
-    treeLabel = "TreeFromGr_oct2_vX";
-  }
-  else if (fileName.find("Grv17x2LowPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gwaegel/hltdev/trees/OniaForest_JpsiMM_0_15_CMSSW_10_3_0_pre5_HLTEC103Xv17_10_9_18.root");
-    treeLabel = "TreeFromGr_oct10_v17x2_LowptJpsi";
-  }
-  else if (fileName.find("Grv20LowPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v20/JpsiMM_0_15/ntuple_HLT_v20_Jpsi_lowpT_OnlyDMTrig_OnlyOniaTreeProd/181016_094701/OniaForest_all.root");
-    treeLabel = "TreeFromGr_oct16_v20_LowptJpsi";
-  }
-  else if (fileName.find("Grv20Upsilon")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v20/Ups1SMM_0_30/ntuple_HLT_v20_Y_OnlyDMTrig_OnlyOniaTreeProd/181016_125050/OniaForest_all.root");
-    treeLabel = "TreeFromGr_oct16_v20_Upsi";
-  }
-  else if (fileName.find("Gbv28LowPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v20/JpsiMM_0_15/OniaForest_all_v28_Jpsi_OnlyDMuTrig_OnlyOniaTreeProd.root");
- treeLabel = "TreeFromGb_oct18_v28_LowPtJpsi";
-  }
-  else if (fileName.find("Gbv27Upsilon")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v27/Ups1SMM_0_30/ntuple_HLT_v27_Y_OnlyDMTrig_OnlyOniaTreeProd/181019_094039/OniaForest_all.root");
-    treeLabel = "TreeFromGb_oct19_v27_Upsi";
-  }
-  else if (fileName.find("Gbv27HighPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v27/JpsiMM_15_40/OniaForest_all_v27_Jpsi_HighpT_OnlyDMuTrig_OnlyOniaTreeProd.root");
-    treeLabel = "TreeFromGb_oct19_v27_HighPtJpsi";
-  }
-  else if (fileName.find("Gbv30LowPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/HLT_v30/JpsiMM_0_15/ntuple_HLT_v30_Jpsi_lowpT_OnlyDMuTrig_OnlyOniaTreeProd/181023_134810/OniaForest_all.root");
-    treeLabel = "TreeFromGb_oct23_v30_LowPtJpsi";
-  }
-  else if (fileName.find("Gbv30Upsilon")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/HLT_v30/Ups1SMM_0_30/ntuple_HLT_v30_Y_OnlyDMTrig_OnlyOniaTreeProd/181023_135552/OniaForest_all.root");
-    treeLabel = "TreeFromGb_oct23_v30_Upsi";
-  }
-  else if (fileName.find("Gbv35LowPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_0_15/Jpsi_015_Ntuple_HLT_v35_all.root");
-    treeLabel = "TreeFromGb_oct24_v35_LowPtJpsi";
-  }
-  else if (fileName.find("Gbv33Upsilon")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/HLT_v33/Ups1SMM_0_30/ntuple_HLT_v33_Y_OnlyDMTrig_OnlyOniaTreeProd/181023_185959/OniaForest_all.root");
-    treeLabel = "TreeFromGb_oct24_v33_Upsi";
-  }
-  cout<<"[INFO] reading tree file "<<f->GetName()<<endl;
+  else if (fileName.find("Upsilon")!=std::string::npos){
+    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/HLT_v18/Ups1SMM_0_30/ntuple_HLT_v18_Y_1S_DB/181011_185040/Oniatree_all.root");
+    treeLabel = "TreeFromGr_oct11_v18x2_Upsi";
+}
+    cout<<"[INFO] reading tree file: "<<f->GetName()<<endl;
   TTree * tree (0x0);
+  TTree* hltTree (0x0);
   tree = (TTree*) f->Get("hionia/myTree");
   if(!tree){
     cout <<"error in the onia tree"<<endl;
-    return;
-  }
+    return;}
+  hltTree = (TTree*) f->Get("hltbitanalysis/HltTree");
+  if(!hltTree){
+    cout <<"error in the trigger tree"<<endl;
+    return;}
+  tree->AddFriend(hltTree);
   Init(tree);
 }
 
@@ -417,6 +495,81 @@ void oniaTree::Init(TTree *tree)
   fChain->SetBranchAddress("Reco_QQ_mumi_ptErr_inner", Reco_QQ_mumi_ptErr_inner, &b_Reco_QQ_mumi_ptErr_inner);
   fChain->SetBranchAddress("Reco_QQ_mupl_ptErr_global", Reco_QQ_mupl_ptErr_global, &b_Reco_QQ_mupl_ptErr_global);
   fChain->SetBranchAddress("Reco_QQ_mumi_ptErr_global", Reco_QQ_mumi_ptErr_global, &b_Reco_QQ_mumi_ptErr_global);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_v1", &HLT_HIL1DoubleMuOpen_v1, &b_HLT_HIL1DoubleMuOpen_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_v1_Prescl", &HLT_HIL1DoubleMuOpen_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_Centrality_30_100_v1", &HLT_HIL1DoubleMuOpen_Centrality_30_100_v1, &b_HLT_HIL1DoubleMuOpen_Centrality_30_100_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_Centrality_30_100_v1_Prescl", &HLT_HIL1DoubleMuOpen_Centrality_30_100_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_Centrality_30_100_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_Centrality_40_100_v1", &HLT_HIL1DoubleMuOpen_Centrality_40_100_v1, &b_HLT_HIL1DoubleMuOpen_Centrality_40_100_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_Centrality_40_100_v1_Prescl", &HLT_HIL1DoubleMuOpen_Centrality_40_100_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_Centrality_40_100_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_Centrality_50_100_v1", &HLT_HIL1DoubleMuOpen_Centrality_50_100_v1, &b_HLT_HIL1DoubleMuOpen_Centrality_50_100_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_Centrality_50_100_v1_Prescl", &HLT_HIL1DoubleMuOpen_Centrality_50_100_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_Centrality_50_100_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_MAXdR2p0_v1", &HLT_HIL1DoubleMuOpen_MAXdR2p0_v1, &b_HLT_HIL1DoubleMuOpen_MAXdR2p0_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_MAXdR2p0_v1_Prescl", &HLT_HIL1DoubleMuOpen_MAXdR2p0_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_MAXdR2p0_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1", &HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1, &b_HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1_Prescl", &HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_MAXdR3p5_v1", &HLT_HIL1DoubleMuOpen_MAXdR3p5_v1, &b_HLT_HIL1DoubleMuOpen_MAXdR3p5_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_MAXdR3p5_v1_Prescl", &HLT_HIL1DoubleMuOpen_MAXdR3p5_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_MAXdR3p5_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_OS_v1", &HLT_HIL1DoubleMuOpen_OS_v1, &b_HLT_HIL1DoubleMuOpen_OS_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_OS_v1_Prescl", &HLT_HIL1DoubleMuOpen_OS_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_OS_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_SS_v1", &HLT_HIL1DoubleMuOpen_SS_v1, &b_HLT_HIL1DoubleMuOpen_SS_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_SS_v1_Prescl", &HLT_HIL1DoubleMuOpen_SS_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_SS_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_er1p6_v1", &HLT_HIL1DoubleMuOpen_er1p6_v1, &b_HLT_HIL1DoubleMuOpen_er1p6_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_er1p6_v1_Prescl", &HLT_HIL1DoubleMuOpen_er1p6_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_er1p6_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_OS_er1p6_v1", &HLT_HIL1DoubleMuOpen_OS_er1p6_v1, &b_HLT_HIL1DoubleMuOpen_OS_er1p6_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMuOpen_OS_er1p6_v1_Prescl", &HLT_HIL1DoubleMuOpen_OS_er1p6_v1_Prescl, &b_HLT_HIL1DoubleMuOpen_OS_er1p6_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu0_v1", &HLT_HIL1DoubleMu0_v1, &b_HLT_HIL1DoubleMu0_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu0_v1_Prescl", &HLT_HIL1DoubleMu0_v1_Prescl, &b_HLT_HIL1DoubleMu0_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu2_v1", &HLT_HIL1DoubleMu2_v1, &b_HLT_HIL1DoubleMu2_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu2_v1_Prescl", &HLT_HIL1DoubleMu2_v1_Prescl, &b_HLT_HIL1DoubleMu2_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu2p5_v1", &HLT_HIL1DoubleMu2p5_v1, &b_HLT_HIL1DoubleMu2p5_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu2p5_v1_Prescl", &HLT_HIL1DoubleMu2p5_v1_Prescl, &b_HLT_HIL1DoubleMu2p5_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu3_v1", &HLT_HIL1DoubleMu3_v1, &b_HLT_HIL1DoubleMu3_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu3_v1_Prescl", &HLT_HIL1DoubleMu3_v1_Prescl, &b_HLT_HIL1DoubleMu3_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu2_OS_v1", &HLT_HIL1DoubleMu2_OS_v1, &b_HLT_HIL1DoubleMu2_OS_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu2_OS_v1_Prescl", &HLT_HIL1DoubleMu2_OS_v1_Prescl, &b_HLT_HIL1DoubleMu2_OS_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu3_OS_v1", &HLT_HIL1DoubleMu3_OS_v1, &b_HLT_HIL1DoubleMu3_OS_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu3_OS_v1_Prescl", &HLT_HIL1DoubleMu3_OS_v1_Prescl, &b_HLT_HIL1DoubleMu3_OS_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu10_v1", &HLT_HIL1DoubleMu10_v1, &b_HLT_HIL1DoubleMu10_v1);
+  fChain->SetBranchAddress("HLT_HIL1DoubleMu10_v1_Prescl", &HLT_HIL1DoubleMu10_v1_Prescl, &b_HLT_HIL1DoubleMu10_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL2_L1DoubleMu10_v1", &HLT_HIL2_L1DoubleMu10_v1, &b_HLT_HIL2_L1DoubleMu10_v1);
+  fChain->SetBranchAddress("HLT_HIL2_L1DoubleMu10_v1_Prescl", &HLT_HIL2_L1DoubleMu10_v1_Prescl, &b_HLT_HIL2_L1DoubleMu10_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3_L1DoubleMu10_v1", &HLT_HIL3_L1DoubleMu10_v1, &b_HLT_HIL3_L1DoubleMu10_v1);
+  fChain->SetBranchAddress("HLT_HIL3_L1DoubleMu10_v1_Prescl", &HLT_HIL3_L1DoubleMu10_v1_Prescl, &b_HLT_HIL3_L1DoubleMu10_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1", &HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1, &b_HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1);
+  fChain->SetBranchAddress("HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1_Prescl", &HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1_Prescl, &b_HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL2DoubleMuOpen_v1", &HLT_HIL2DoubleMuOpen_v1, &b_HLT_HIL2DoubleMuOpen_v1);
+  fChain->SetBranchAddress("HLT_HIL2DoubleMuOpen_v1_Prescl", &HLT_HIL2DoubleMuOpen_v1_Prescl, &b_HLT_HIL2DoubleMuOpen_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3DoubleMuOpen_v1", &HLT_HIL3DoubleMuOpen_v1, &b_HLT_HIL3DoubleMuOpen_v1);
+  fChain->SetBranchAddress("HLT_HIL3DoubleMuOpen_v1_Prescl", &HLT_HIL3DoubleMuOpen_v1_Prescl, &b_HLT_HIL3DoubleMuOpen_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3DoubleMuOpen_M60120_v1", &HLT_HIL3DoubleMuOpen_M60120_v1, &b_HLT_HIL3DoubleMuOpen_M60120_v1);
+  fChain->SetBranchAddress("HLT_HIL3DoubleMuOpen_M60120_v1_Prescl", &HLT_HIL3DoubleMuOpen_M60120_v1_Prescl, &b_HLT_HIL3DoubleMuOpen_M60120_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3DoubleMuOpen_Jpsi_v1", &HLT_HIL3DoubleMuOpen_Jpsi_v1, &b_HLT_HIL3DoubleMuOpen_Jpsi_v1);
+  fChain->SetBranchAddress("HLT_HIL3DoubleMuOpen_Jpsi_v1_Prescl", &HLT_HIL3DoubleMuOpen_Jpsi_v1_Prescl, &b_HLT_HIL3DoubleMuOpen_Jpsi_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3DoubleMuOpen_Upsi_v1", &HLT_HIL3DoubleMuOpen_Upsi_v1, &b_HLT_HIL3DoubleMuOpen_Upsi_v1);
+  fChain->SetBranchAddress("HLT_HIL3DoubleMuOpen_Upsi_v1_Prescl", &HLT_HIL3DoubleMuOpen_Upsi_v1_Prescl, &b_HLT_HIL3DoubleMuOpen_Upsi_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu0_L2Mu0_v1", &HLT_HIL3Mu0_L2Mu0_v1, &b_HLT_HIL3Mu0_L2Mu0_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu0_L2Mu0_v1_Prescl", &HLT_HIL3Mu0_L2Mu0_v1_Prescl, &b_HLT_HIL3Mu0_L2Mu0_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu0_L2Mu0_testignore_v1", &HLT_HIL3Mu0_L2Mu0_testignore_v1, &b_HLT_HIL3Mu0_L2Mu0_testignore_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu0_L2Mu0_testignore_v1_Prescl", &HLT_HIL3Mu0_L2Mu0_testignore_v1_Prescl, &b_HLT_HIL3Mu0_L2Mu0_testignore_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu2_L2Mu0_v1", &HLT_HIL3Mu2_L2Mu0_v1, &b_HLT_HIL3Mu2_L2Mu0_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu2_L2Mu0_v1_Prescl", &HLT_HIL3Mu2_L2Mu0_v1_Prescl, &b_HLT_HIL3Mu2_L2Mu0_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu2p5_L2Mu0_v1", &HLT_HIL3Mu2p5_L2Mu0_v1, &b_HLT_HIL3Mu2p5_L2Mu0_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu2p5_L2Mu0_v1_Prescl", &HLT_HIL3Mu2p5_L2Mu0_v1_Prescl, &b_HLT_HIL3Mu2p5_L2Mu0_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu3_L2Mu0_v1", &HLT_HIL3Mu3_L2Mu0_v1, &b_HLT_HIL3Mu3_L2Mu0_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu3_L2Mu0_v1_Prescl", &HLT_HIL3Mu3_L2Mu0_v1_Prescl, &b_HLT_HIL3Mu3_L2Mu0_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu2p5_L1DoubleMu0_v1", &HLT_HIL3Mu2p5_L1DoubleMu0_v1, &b_HLT_HIL3Mu2p5_L1DoubleMu0_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu2p5_L1DoubleMu0_v1_Prescl", &HLT_HIL3Mu2p5_L1DoubleMu0_v1_Prescl, &b_HLT_HIL3Mu2p5_L1DoubleMu0_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu3_L1DoubleMuOpen_v1", &HLT_HIL3Mu3_L1DoubleMuOpen_v1, &b_HLT_HIL3Mu3_L1DoubleMuOpen_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu3_L1DoubleMuOpen_v1_Prescl", &HLT_HIL3Mu3_L1DoubleMuOpen_v1_Prescl, &b_HLT_HIL3Mu3_L1DoubleMuOpen_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1", &HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1, &b_HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1_Prescl", &HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1_Prescl, &b_HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu3_L1DoubleMu0_v1", &HLT_HIL3Mu3_L1DoubleMu0_v1, &b_HLT_HIL3Mu3_L1DoubleMu0_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu3_L1DoubleMu0_v1_Prescl", &HLT_HIL3Mu3_L1DoubleMu0_v1_Prescl, &b_HLT_HIL3Mu3_L1DoubleMu0_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1", &HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1, &b_HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1_Prescl", &HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1_Prescl, &b_HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1_Prescl);
+  fChain->SetBranchAddress("HLT_HIL3Mu3_L1TripleMuOpen_v1", &HLT_HIL3Mu3_L1TripleMuOpen_v1, &b_HLT_HIL3Mu3_L1TripleMuOpen_v1);
+  fChain->SetBranchAddress("HLT_HIL3Mu3_L1TripleMuOpen_v1_Prescl", &HLT_HIL3Mu3_L1TripleMuOpen_v1_Prescl, &b_HLT_HIL3Mu3_L1TripleMuOpen_v1_Prescl);
+
 
   if (fChain->GetBranch("Reco_QQ_4mom"))      { fChain->GetBranch("Reco_QQ_4mom")->SetAutoDelete(false);      }
   if (fChain->GetBranch("Reco_QQ_mupl_4mom")) { fChain->GetBranch("Reco_QQ_mupl_4mom")->SetAutoDelete(false); }
@@ -454,6 +607,44 @@ void oniaTree::Init(TTree *tree)
   if (fChain->GetBranch("Reco_QQ_mumi_normChi2_inner")) fChain->SetBranchStatus("Reco_QQ_mumi_normChi2_inner",1);
   if (fChain->GetBranch("Reco_QQ_mupl_TrkMuArb")) fChain->SetBranchStatus("Reco_QQ_mupl_TrkMuArb",1);
   if (fChain->GetBranch("Reco_QQ_mumi_TrkMuArb")) fChain->SetBranchStatus("Reco_QQ_mumi_TrkMuArb",1);
+
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_Centrality_30_100_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_Centrality_30_100_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_Centrality_40_100_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_Centrality_40_100_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_Centrality_50_100_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_Centrality_50_100_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_MAXdR2p0_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_MAXdR2p0_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_OS_MAXdR2p0_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_MAXdR3p5_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_MAXdR3p5_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_OS_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_OS_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_SS_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_SS_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_er1p6_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_er1p6_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMuOpen_OS_er1p6_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMuOpen_OS_er1p6_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMu0_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMu0_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMu2_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMu2_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMu2p5_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMu2p5_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMu3_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMu3_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMu2_OS_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMu2_OS_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMu3_OS_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMu3_OS_v1",1);
+  if (fChain->GetBranch("HLT_HIL1DoubleMu10_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMu10_v1",1);
+  if (fChain->GetBranch("HLT_HIL2_L1DoubleMu10_v1")) fChain->SetBranchStatus("HLT_HIL1DoubleMu10_v1",1);
+  if (fChain->GetBranch("HLT_HIL3_L1DoubleMu10_v1")) fChain->SetBranchStatus("HLT_HIL3_L1DoubleMu10_v1",1);
+  if (fChain->GetBranch("HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1")) fChain->SetBranchStatus("HLT_HIL2DoubleMu_L1DoubleMuOpen_OS_MAXdR2p0_v1",1);
+  if (fChain->GetBranch("HLT_HIL2DoubleMuOpen_v1")) fChain->SetBranchStatus("HLT_HIL2DoubleMuOpen_v1",1);
+  if (fChain->GetBranch("HLT_HIL3DoubleMuOpen_v1")) fChain->SetBranchStatus("HLT_HIL3DoubleMuOpen_v1",1);
+  if (fChain->GetBranch("HLT_HIL3DoubleMuOpen_M60120_v1")) fChain->SetBranchStatus("HLT_HIL3DoubleMuOpen_M60120_v1",1);
+  if (fChain->GetBranch("HLT_HIL3DoubleMuOpen_Jpsi_v1")) fChain->SetBranchStatus("HLT_HIL3DoubleMuOpen_Jpsi_v1",1);
+  if (fChain->GetBranch("HLT_HIL3DoubleMuOpen_Upsi_v1")) fChain->SetBranchStatus("HLT_HIL3DoubleMuOpen_Upsi_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu0_L2Mu0_v1")) fChain->SetBranchStatus("HLT_HIL3Mu0_L2Mu0_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu0_L2Mu0_testignore_v1")) fChain->SetBranchStatus("HLT_HIL3Mu0_L2Mu0_testignore_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu2_L2Mu0_v1")) fChain->SetBranchStatus("HLT_HIL3Mu2_L2Mu0_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu2p5_L2Mu0_v1")) fChain->SetBranchStatus("HLT_HIL3Mu2p5_L2Mu0_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu3_L2Mu0_v1")) fChain->SetBranchStatus("HLT_HIL3Mu3_L2Mu0_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu2p5_L1DoubleMu0_v1")) fChain->SetBranchStatus("HLT_HIL3Mu2p5_L1DoubleMu0_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu3_L1DoubleMuOpen_v1")) fChain->SetBranchStatus("HLT_HIL3Mu3_L1DoubleMuOpen_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu3_L1DoubleMu0_v1")) fChain->SetBranchStatus("HLT_HIL3Mu3_L1DoubleMuOpen_OS_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1")) fChain->SetBranchStatus("HLT_HIL3Mu3_L1DoubleMu0_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1")) fChain->SetBranchStatus("HLT_HIL3Mu3NHitQ10_L1DoubleMuOpen_v1",1);
+  if (fChain->GetBranch("HLT_HIL3Mu3_L1TripleMuOpen_v1")) fChain->SetBranchStatus("HLT_HIL3Mu3_L1TripleMuOpen_v1",1);
 
   Notify();
 }
@@ -533,4 +724,4 @@ Double_t oniaTree::deltaR(TLorentzVector* GenMuon, TLorentzVector* RecoMuon)
   return ((double) TMath::Sqrt( (dEta*dEta) + (dPhi*dPhi) ) );
 };
 
-#endif // #ifdef makeTrigEff_cxx 
+#endif // #ifdef makeTrigEff_HLTbitanalyzer_cxx 
