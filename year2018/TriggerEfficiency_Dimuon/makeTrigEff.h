@@ -193,8 +193,6 @@ class oniaTree {
   virtual void     TrigEffCalc(string trigLabel = "");
   virtual void     AllEffCalc();
   virtual void     Plot(string inputName);
-  virtual void     Plot_v18MuOpen0();
-  virtual void     Plot_v1417MuOpen_withOptions();
   virtual int      color(int i);
   virtual void     plotAll();
   virtual Bool_t   isTriggerMatch (Int_t iRecoQQ, Int_t TriggerBit);
@@ -209,65 +207,9 @@ class oniaTree {
 oniaTree::oniaTree(string fileName) : fChain(0)
 {
   TFile* f(0x0);
-  if (fileName.find("Pr")!=std::string::npos) {
-    f = TFile::Open("JpsiMM_0_15_OniaForest.root");
-    treeLabel = "TreeFromPrashant_sept6";
-  }
-  else if (fileName.find("JBv18all")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_0_15/Jpsi_015_Ntuple_HLT_v18_all.root");
-    treeLabel = "TreeFromJB_sept7_v18_all";
-    }
-  else if (fileName.find("JBv14special")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Ntuple_SpecialHLT_v14.root");
-    treeLabel = "TreeFromJB_sept7_v14_specialHLT";
-  }
-  else if (fileName.find("JBv15special")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Ntuple_SpecialHLT_v15.root");
-    treeLabel = "TreeFromJB_sept7_v15_specialHLT";
-  }
-  else if (fileName.find("JBv16special")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Ntuple_SpecialHLT_v16.root");
-    treeLabel = "TreeFromJB_sept7_v16_specialHLT";
-  }
-  else if (fileName.find("JBv17special")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Ntuple_SpecialHLT_v17.root");
-    treeLabel = "TreeFromJB_sept7_v17_specialHLT";
-  }
-  else if (fileName.find("JBv8fulltrk")!=std::string::npos){
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_0_15/Jpsi015_10_2_4_fulltrkv8_all.root");
-    treeLabel = "TreeFromJB_sept10_v8_fulltrk";
-  }
-  else if (fileName.find("HLTEMv16")!=std::string::npos){
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_0_15/Jpsi_015_10_1_10_L1v9_HLTv16_all.root ");
-    treeLabel = "TreeFromJB_HLTFromEM_sept11_v16";
-  }
-  else if (fileName.find("JBv26Upsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Ups1SMM_0_30/Upsi_L1v9_HLTnewL3v26_all.root");
-    treeLabel = "TreeFromJB_sept17_v26_Upsi";
-  }
-  else if (fileName.find("JBv26HighPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_15_40/Jpsi_1540_10_1_10_L1v9_HLTv26_all.root");
-    treeLabel = "TreeFromJB_sept17_v26_HighptJpsi";
-  }
-  else if (fileName.find("JBv26Z")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/Zm10m10/Zm10_10_1_10_L1v9_HLTv26_all.root");
-    treeLabel = "TreeFromJB_sept17_v26_Z";
-  }
-  else if (fileName.find("JBv26")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_0_15/Jpsi_015_10_1_10_HLTnewL3v26_Dbl_all.root");
-    treeLabel = "TreeFromJB_sept17_v26";
-  }
-  else if (fileName.find("GrvX")!=std::string::npos) {
-    f = TFile::Open("/afs/cern.ch/user/g/gwaegel/work/public/hltdev/trees/OniaForest_CMSSW_10_3_0_pre5.root");
-    treeLabel = "TreeFromGr_oct2_vX";
-  }
-  else if (fileName.find("Grv17x2LowPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gwaegel/hltdev/trees/OniaForest_JpsiMM_0_15_CMSSW_10_3_0_pre5_HLTEC103Xv17_10_9_18.root");
-    treeLabel = "TreeFromGr_oct10_v17x2_LowptJpsi";
-  }
-  else if (fileName.find("Grv20LowPtJpsi")!=std::string::npos) {
+  if (fileName.find("Grv20LowPtJpsi")!=std::string::npos) {
     f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v20/JpsiMM_0_15/ntuple_HLT_v20_Jpsi_lowpT_OnlyDMTrig_OnlyOniaTreeProd/181016_094701/OniaForest_all.root");
-    treeLabel = "TreeFromGr_oct16_v20_LowptJpsi";
+    treeLabel = "TreeFromGr_oct16_v20_LowPtJpsi";
   }
   else if (fileName.find("Grv20Upsilon")!=std::string::npos) {
     f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v20/Ups1SMM_0_30/ntuple_HLT_v20_Y_OnlyDMTrig_OnlyOniaTreeProd/181016_125050/OniaForest_all.root");
