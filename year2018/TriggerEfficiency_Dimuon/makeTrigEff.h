@@ -193,6 +193,8 @@ class oniaTree {
   virtual void     TrigEffCalc(string trigLabel = "");
   virtual void     AllEffCalc();
   virtual void     Plot(string inputName);
+  virtual void     Plot_v18MuOpen0();
+  virtual void     Plot_v1417MuOpen_withOptions();
   virtual int      color(int i);
   virtual void     plotAll();
   virtual Bool_t   isTriggerMatch (Int_t iRecoQQ, Int_t TriggerBit);
@@ -207,35 +209,7 @@ class oniaTree {
 oniaTree::oniaTree(string fileName) : fChain(0)
 {
   TFile* f(0x0);
-  if (fileName.find("Grv20LowPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v20/JpsiMM_0_15/ntuple_HLT_v20_Jpsi_lowpT_OnlyDMTrig_OnlyOniaTreeProd/181016_094701/OniaForest_all.root");
-    treeLabel = "TreeFromGr_oct16_v20_LowPtJpsi";
-  }
-  else if (fileName.find("Grv20Upsilon")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v20/Ups1SMM_0_30/ntuple_HLT_v20_Y_OnlyDMTrig_OnlyOniaTreeProd/181016_125050/OniaForest_all.root");
-    treeLabel = "TreeFromGr_oct16_v20_Upsi";
-  }
-  else if (fileName.find("Gbv28LowPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v20/JpsiMM_0_15/OniaForest_all_v28_Jpsi_OnlyDMuTrig_OnlyOniaTreeProd.root");
- treeLabel = "TreeFromGb_oct18_v28_LowPtJpsi";
-  }
-  else if (fileName.find("Gbv27Upsilon")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v27/Ups1SMM_0_30/ntuple_HLT_v27_Y_OnlyDMTrig_OnlyOniaTreeProd/181019_094039/OniaForest_all.root");
-    treeLabel = "TreeFromGb_oct19_v27_Upsi";
-  }
-  else if (fileName.find("Gbv27HighPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/pre6/HLT_v27/JpsiMM_15_40/OniaForest_all_v27_Jpsi_HighpT_OnlyDMuTrig_OnlyOniaTreeProd.root");
-    treeLabel = "TreeFromGb_oct19_v27_HighPtJpsi";
-  }
-  else if (fileName.find("Gbv30LowPtJpsi")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/HLT_v30/JpsiMM_0_15/ntuple_HLT_v30_Jpsi_lowpT_OnlyDMuTrig_OnlyOniaTreeProd/181023_134810/OniaForest_all.root");
-    treeLabel = "TreeFromGb_oct23_v30_LowPtJpsi";
-  }
-  else if (fileName.find("Gbv30Upsilon")!=std::string::npos) {
-    f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/HLT_v30/Ups1SMM_0_30/ntuple_HLT_v30_Y_OnlyDMTrig_OnlyOniaTreeProd/181023_135552/OniaForest_all.root");
-    treeLabel = "TreeFromGb_oct23_v30_Upsi";
-  }
-  else if (fileName.find("Gbv35LowPtJpsi")!=std::string::npos) {
+ if (fileName.find("Gbv35LowPtJpsi")!=std::string::npos) {
     f = TFile::Open("/eos/cms/store/group/phys_heavyions/jaebeom/JpsiMM_0_15/Jpsi_015_Ntuple_HLT_v35_all.root");
     treeLabel = "TreeFromGb_oct24_v35_LowPtJpsi";
   }
@@ -243,6 +217,15 @@ oniaTree::oniaTree(string fileName) : fChain(0)
     f = TFile::Open("/eos/cms/store/group/phys_heavyions/dileptons/gbak/HLT_v33/Ups1SMM_0_30/ntuple_HLT_v33_Y_OnlyDMTrig_OnlyOniaTreeProd/181023_185959/OniaForest_all.root");
     treeLabel = "TreeFromGb_oct24_v33_Upsi";
   }
+  else if (fileName.find("Mev36LowPtJpsiNew")!=std::string::npos){
+    f = TFile::Open("/afs/cern.ch/work/b/bdiab/public/run2018/OniaTrees/CMSSW_10_3_1/src/makeOniaMC/OniaForest_L1Pt9999_L1Q7.root");
+    treeLabel = "TreeFromMe_Nov5_v36_LowPtJpsi";
+  }
+  else if (fileName.find("Mev36LowPtJpsiDefault")!=std::string::npos){
+    f = TFile::Open("/afs/cern.ch/work/b/bdiab/public/run2018/OniaTrees/CMSSW_10_3_1/src/makeOniaMC/OniaForest_Default.root");
+    treeLabel = "TreeFromMe_Nov5_v36_LowPtJpsi_Default";
+  }
+
   cout<<"[INFO] reading tree file "<<f->GetName()<<endl;
   TTree * tree (0x0);
   tree = (TTree*) f->Get("hionia/myTree");
