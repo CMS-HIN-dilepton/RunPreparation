@@ -14,3 +14,10 @@ To nicely plot different combinations of turn-on curves together you have to fir
 t.Plot("input_LowPtJpsi_L3Mu0X_L2Mu0Y_HLTv35") #don't put "InputFiles/" or ".txt"
 ```
 You can use makeTrigEff_HLTbitanalyzer.C in the same way. The efficiency is obtained using the HLTbitanalyzer tree
+
+
+To plot the ratio of two curves (after you get the effeciency files with t.AllEffCalc()):
+```bash
+.L plotQuickly.C+
+plotRatio("inputLabe", "path/file_Numerator.root", "path/file_Denominator.root") #in the inputLabel please specify the sample (LowPtJpsi, Upsilon...) and if you want you can add the name of the trigger (!no spaces)
+```
