@@ -64,6 +64,7 @@ e.g. rates_nov02.txt
 "python sorting.py rates_nov02.txt output_file_prefix"
 
 ===> if everything is fine, the screen output will be:
+````
 python sorting.py Rates_nov3.txt test
 ('outputfilename: ', 'test')
 ('Number of PS columns:', 11)
@@ -79,9 +80,10 @@ python sorting.py Rates_nov3.txt test
 ('PS column# ....: ', '40kHz')
 ('PS column# ....: ', '50kHz')
 ('PS column# ....: ', '60kHz')
-
+''''
 
 AND, there will be a bunch of text files in the same directory, with the formatted files:
+````
 ls -lt *.txt
 -rw-r--r--  1 cameliamironov  staff   23302 Nov  8 12:11 test_60kHz.txt
 -rw-r--r--  1 cameliamironov  staff   23294 Nov  8 12:11 test_50kHz.txt
@@ -94,7 +96,7 @@ ls -lt *.txt
 -rw-r--r--  1 cameliamironov  staff   23287 Nov  8 12:11 test_13kHz.txt
 -rw-r--r--  1 cameliamironov  staff   23280 Nov  8 12:11 test_10kHz.txt
 -rw-r--r--  1 cameliamironov  staff   23295 Nov  8 12:11 test_8kHz.txt
-
+''''
 
 3) Run the overlap tool. There is a script in which you provide all the info:
 -- an input file (data or MC, it doesn't matter), BUT, for 'MB triggered events' (so PS for MB=1, or, each event triggered the MB trigger)
@@ -114,10 +116,12 @@ ls -lt *.txt
 "python readOutput.py spitScreen.txt simpleOut"
 
 ---> have 3 txt spit out:
+````
 ls -lt simpleOut_pd*
 -rw-r--r--  1 cameliamironov  staff  831 Nov  6 13:28 simpleOut_pdsizeave.txt
 -rw-r--r--@ 1 cameliamironov  staff  798 Nov  6 13:28 simpleOut_pdsize.txt
 -rw-r--r--@ 1 cameliamironov  staff  473 Nov  6 13:28 simpleOut_pdrate.txt
+''''
 
 The content can be put in an excel sheet, as the one uploaded here, called "summary_2018PDs"
 
