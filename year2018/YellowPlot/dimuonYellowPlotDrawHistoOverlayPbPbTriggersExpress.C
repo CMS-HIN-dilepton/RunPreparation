@@ -44,8 +44,9 @@ void dimuonYellowPlotDrawHistoOverlayPbPbTriggersExpress(){
   //
 
   //TString inFileName1 = "dimuonMassYellowPlotHistosTriggerSeparationPbPbExpress_262548_263729_noCUT.root";
-	//TString inFileName1 = "dimuonMassYellowPlotHistosTriggerSeparation392-483.root";
-	TString inFileName1 = "dimuonMassYellowPlotHistosTriggerSeparation381-636_trgtest.root";
+	//TString inFileName1 = "dimuonMassYellowPlotHistosTriggerSeparation381-941.root";
+	TString inFileName1 = "dimuonMassYellowPlotHistosTriggerSeparation381-941.root";//input file name
+	TString aka = "381-941";
 	cout << "dimuonYellowPlot: Opening histogram file " << inFileName1 << endl;
 
 	TFile *inf = new TFile(inFileName1,"READ");
@@ -67,35 +68,35 @@ void dimuonYellowPlotDrawHistoOverlayPbPbTriggersExpress(){
 	// Bit 24: HLT_HIL3Mu12_v1                            Prescale ?
 //}}}
 
-	TString aka = "381-636";
-	const Int_t NOT = 4;//Number Of Triggers
-/*
+	const Int_t NOT = 3;//Number Of Triggers
 	TH1F* massHistoUnlikeSignBit[NOT];
 	TH1F* massHistoLikeSignBit[NOT];
-*/
-	TH1F* massHistoUnlikeSign1[NOT];
-	TH1F* massHistoUnlikeSign2[NOT];
-	TH1F* massHistoUnlikeSign3[NOT];
-	const Int_t tBit[NOT] = {0, 12, 13, 23};
+	//const Int_t tBit[NOT] = {0, 12, 13, 23};
+	const Int_t tBit[NOT] = {0, 12, 13};
 	TString triggerName[NOT] = {"HLT_HIL1DoubleMuOpen_v1",
 										"HLT_HIL3Mu0NHitQ10_L2Mu0_MAXdR3p5_M1to5_v1",
-										"HLT_HIL3Mu2p5NHitQ10_L2Mu2_M7toinf_v1",
-										"HLT_HIL3Mu12_v1"};
-	unsigned int BinsTogether = 2;
+										"HLT_HIL3Mu2p5NHitQ10_L2Mu2_M7toinf_v1"};
+	//									"HLT_HIL3Mu12_v1"};
+	TString triggerNameh[NOT] = {"double muon inclusive",
+										"J/#psi region",
+										"#varUpsilon + high masses"};
+	unsigned int BinsTogether = 2;//nuber of bins to be merged
 	for(Int_t itrg = 0; itrg < NOT; itrg++)
 	{
-/*
+
 		massHistoUnlikeSignBit[itrg] = (TH1F*) inf->Get(Form("massHistoUnlikeSignBit%d", tBit[itrg]));
 		massHistoLikeSignBit[itrg] = (TH1F*) inf->Get(Form("massHistoLikeSignBit%d", tBit[itrg]));
 		massHistoUnlikeSignBit[itrg]->Rebin(BinsTogether); 
 		massHistoLikeSignBit[itrg]->Rebin(BinsTogether); 
-*/
+
+/*
 		massHistoUnlikeSign1[itrg] = (TH1F*) inf->Get(Form("massHistoUnlikeSignHLT%d", tBit[itrg]));
 		massHistoUnlikeSign2[itrg] = (TH1F*) inf->Get(Form("massHistoUnlikeSignReco%d", tBit[itrg]));
-		massHistoUnlikeSign3[itrg] = (TH1F*) inf->Get(Form("massHistoUnlikeSignBoth%d", tBit[itrg]));
+		massHistoUnlikeSignBit[itrg] = (TH1F*) inf->Get(Form("massHistoUnlikeSignBoth%d", tBit[itrg]));
 		massHistoUnlikeSign1[itrg]->Rebin(BinsTogether); 
 		massHistoUnlikeSign2[itrg]->Rebin(BinsTogether); 
-		massHistoUnlikeSign3[itrg]->Rebin(BinsTogether); 
+		massHistoUnlikeSignBit[itrg]->Rebin(BinsTogether); 
+*/
 	}
 
 /*
@@ -106,37 +107,31 @@ void dimuonYellowPlotDrawHistoOverlayPbPbTriggersExpress(){
 	massHistoLikeSignBit4->Rebin(BinsTogether); 
 */
   
-//  if (massHistoUnlikeSignBit[0]==0x0) { 
-//    cout << "Histogram not found in the input file. Fatal error, can't continue! Bailing out! Agh!" << endl;
-//    return;
-//  }
+  if (massHistoUnlikeSignBit[0]==0x0) { 
+    cout << "Histogram not found in the input file. Fatal error, can't continue! Bailing out! Agh!" << endl;
+    return;
+  }
 /*
   cout << "Bit 1,  HLT_HIL1DoubleMu0_v1 : " <<  massHistoUnlikeSignBit1->GetName() << ", entries: " << massHistoUnlikeSignBit1->GetEntries() << endl;
   cout << "Bit 16, HLT_HIL3DoubleMu0_Cent30_OS_m2p5to4p5_v1 : " << massHistoUnlikeSignBit16->GetName() << ", entries: " << massHistoUnlikeSignBit16->GetEntries() << endl;
 */
 
-  // Set up the Canvas
-/*
-	TCanvas* yellowPlot = new TCanvas("yellowPlot","yellowPlot",500,500);
-	yellowPlot->cd();
-	yellowPlot->SetLogx();
-	yellowPlot->SetLogy();
-*/
 /*
 	const Int_t tFColor[NOT] = {kTeal-5, kYellow, kRed-5, kBlue-5,
 										kViolet-5};
 	const Int_t tLColor[NOT] = {kGreen+3, kYellow+1, kRed+3, kBlue+3,
 										kViolet+3};
 */
-	TCanvas* yellowPlot1 = new TCanvas("yellowPlot1","yellowPlot",500,500);
-	yellowPlot1->cd();
-	yellowPlot1->SetLogx();
-	yellowPlot1->SetLogy();
+	const Int_t tFColor[NOT] = {393, 208, 215};
+	const Int_t tLColor[NOT] = {393+1, 208-1, 215-2};
 
-	const Int_t tFColor[NOT] = {kYellow, kRed-5, kBlue-5, kViolet-5};
-	const Int_t tLColor[NOT] = {kYellow+1, kRed+3, kBlue+3, kViolet+3};
+  // Set up the Canvas
+	TCanvas* yellowPlot = new TCanvas("yellowPlot","yellowPlot",500,500);
+	yellowPlot->cd();
+	yellowPlot->SetLogx();
+	yellowPlot->SetLogy();
 
-/*
+
 	for(Int_t itrg = 0; itrg < NOT; itrg++)
 	{
 		massHistoUnlikeSignBit[itrg]->SetFillColor(tFColor[itrg]);
@@ -144,116 +139,28 @@ void dimuonYellowPlotDrawHistoOverlayPbPbTriggersExpress(){
 		massHistoUnlikeSignBit[itrg]->SetLineColor(tLColor[itrg]);
 		if(itrg == 0)
 		{
-			massHistoUnlikeSignBit[itrg]->GetYaxis()->SetTitleOffset(1.2);
+			massHistoUnlikeSignBit[itrg]->GetYaxis()->SetTitleOffset(1.33);
 			massHistoUnlikeSignBit[itrg]->GetYaxis()->SetTitleSize(0.04);
 			massHistoUnlikeSignBit[itrg]->GetYaxis()->SetTitleFont(42);
+			massHistoUnlikeSignBit[itrg]->GetYaxis()->CenterTitle();
 			massHistoUnlikeSignBit[itrg]->GetYaxis()->SetRangeUser(1e-1,4e5);
+			massHistoUnlikeSignBit[itrg]->GetXaxis()->SetTitleOffset(1.);
 			massHistoUnlikeSignBit[itrg]->GetXaxis()->SetTitleSize(0.045);
 			massHistoUnlikeSignBit[itrg]->GetXaxis()->SetTitleFont(42);
+			massHistoUnlikeSignBit[itrg]->GetXaxis()->CenterTitle();
 			massHistoUnlikeSignBit[itrg]->GetXaxis()->SetRangeUser(0.5, 2e2);
 			massHistoUnlikeSignBit[itrg]->Draw("");
 		}
 		else massHistoUnlikeSignBit[itrg]->Draw("same");
 	}
-*/
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		massHistoUnlikeSign1[itrg]->SetFillColor(tFColor[itrg]);
-		massHistoUnlikeSign1[itrg]->SetLineWidth(2);
-		massHistoUnlikeSign1[itrg]->SetLineColor(tLColor[itrg]);
-		if(itrg == 0)
-		{
-			massHistoUnlikeSign1[itrg]->GetYaxis()->SetTitleOffset(1.2);
-			massHistoUnlikeSign1[itrg]->GetYaxis()->SetTitleSize(0.04);
-			massHistoUnlikeSign1[itrg]->GetYaxis()->SetTitleFont(42);
-			massHistoUnlikeSign1[itrg]->GetYaxis()->SetRangeUser(1e-1,4e5);
-			massHistoUnlikeSign1[itrg]->GetXaxis()->SetTitleSize(0.045);
-			massHistoUnlikeSign1[itrg]->GetXaxis()->SetTitleFont(42);
-			massHistoUnlikeSign1[itrg]->GetXaxis()->SetRangeUser(0.5, 2e2);
-			massHistoUnlikeSign1[itrg]->Draw("");
-		}
-		else massHistoUnlikeSign1[itrg]->Draw("same");
-	}
-	//yellowPlot->SaveAs(Form("YellowPlot_%s.pdf", aka.Data()));
-	//yellowPlot->SaveAs(Form("YellowPlot_%s.png", aka.Data()));
-	yellowPlot1->SaveAs(Form("YellowPlot_HLT_%s.pdf", aka.Data()));
-	yellowPlot1->SaveAs(Form("YellowPlot_HLT_%s.png", aka.Data()));
 
-//{{{
-	TCanvas* yellowPlot2 = new TCanvas("yellowPlot2","yellowPlot",500,500);
-	yellowPlot2->cd();
-	yellowPlot2->SetLogx();
-	yellowPlot2->SetLogy();
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		massHistoUnlikeSign2[itrg]->SetFillColor(tFColor[itrg]);
-		massHistoUnlikeSign2[itrg]->SetLineWidth(2);
-		massHistoUnlikeSign2[itrg]->SetLineColor(tLColor[itrg]);
-		if(itrg == 0)
-		{
-			massHistoUnlikeSign2[itrg]->GetYaxis()->SetTitleOffset(1.2);
-			massHistoUnlikeSign2[itrg]->GetYaxis()->SetTitleSize(0.04);
-			massHistoUnlikeSign2[itrg]->GetYaxis()->SetTitleFont(42);
-			massHistoUnlikeSign2[itrg]->GetYaxis()->SetRangeUser(1e-1,4e5);
-			massHistoUnlikeSign2[itrg]->GetXaxis()->SetTitleSize(0.045);
-			massHistoUnlikeSign2[itrg]->GetXaxis()->SetTitleFont(42);
-			massHistoUnlikeSign2[itrg]->GetXaxis()->SetRangeUser(0.5, 2e2);
-			massHistoUnlikeSign2[itrg]->Draw("");
-		}
-		else massHistoUnlikeSign2[itrg]->Draw("same");
-	}
-	yellowPlot2->SaveAs(Form("YellowPlot_Reco_%s.pdf", aka.Data()));
-	yellowPlot2->SaveAs(Form("YellowPlot_Reco_%s.png", aka.Data()));
-//}}}
-
-//{{{
-	TCanvas* yellowPlot3 = new TCanvas("yellowPlot3","yellowPlot",500,500);
-	yellowPlot3->cd();
-	yellowPlot3->SetLogx();
-	yellowPlot3->SetLogy();
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		massHistoUnlikeSign3[itrg]->SetFillColor(tFColor[itrg]);
-		massHistoUnlikeSign3[itrg]->SetLineWidth(2);
-		massHistoUnlikeSign3[itrg]->SetLineColor(tLColor[itrg]);
-		if(itrg == 0)
-		{
-			massHistoUnlikeSign3[itrg]->GetYaxis()->SetTitleOffset(1.2);
-			massHistoUnlikeSign3[itrg]->GetYaxis()->SetTitleSize(0.04);
-			massHistoUnlikeSign3[itrg]->GetYaxis()->SetTitleFont(42);
-			massHistoUnlikeSign3[itrg]->GetYaxis()->SetRangeUser(1e-1,4e5);
-			massHistoUnlikeSign3[itrg]->GetXaxis()->SetTitleSize(0.045);
-			massHistoUnlikeSign3[itrg]->GetXaxis()->SetTitleFont(42);
-			massHistoUnlikeSign3[itrg]->GetXaxis()->SetRangeUser(0.5, 2e2);
-			massHistoUnlikeSign3[itrg]->Draw("");
-		}
-		else massHistoUnlikeSign3[itrg]->Draw("same");
-	}
-	yellowPlot3->SaveAs(Form("YellowPlot_Both_%s.pdf", aka.Data()));
-	yellowPlot3->SaveAs(Form("YellowPlot_Both_%s.png", aka.Data()));
-//}}}
+	yellowPlot->SaveAs(Form("YellowPlot_%s.pdf", aka.Data()));
+	yellowPlot->SaveAs(Form("YellowPlot_%s.png", aka.Data()));
 
   // The second histogram can cover the axes if it has a fill color.
   // Add the following line so that the axes and tick marks are visible.
-/*
-	TCanvas* yellowPlotScale = new TCanvas("yellowPlotScale","yellowPlot",500,500);
-	yellowPlotScale->cd();
-	yellowPlotScale->SetLogx();
-	yellowPlotScale->SetLogy();
-*/
 	//gPad->RedrawAxis();
 
-	cout << "dimuonYellowPlot: Scaling histograms..." << endl;
-/*
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		for(Int_t ibin = 1; ibin <= massHistoUnlikeSignBit[0]->GetNbinsX(); ibin++)
-		{
-			massHistoUnlikeSignBit[itrg]->SetBinContent(ibin, massHistoUnlikeSignBit[itrg]->GetBinContent(ibin)/massHistoUnlikeSignBit[itrg]->GetBinWidth(itrg));
-			massHistoLikeSignBit[itrg]->SetBinContent(ibin, massHistoLikeSignBit[itrg]->GetBinContent(ibin)/massHistoLikeSignBit[itrg]->GetBinWidth(itrg));
-		}
-	}
-*/
 /*
 //scale by width{{{
   // Scale by bin width, needs to be done bin by bin because bin widths are different.
@@ -331,141 +238,73 @@ void dimuonYellowPlotDrawHistoOverlayPbPbTriggersExpress(){
   //latex->DrawLatex(0.24,0.88,"#rho, #omega");
   //latex->DrawLatex(0.32,0.88,"#phi");
   
-	//latex->DrawLatex(0.20,0.78,"J/#psi");
-	//latex->DrawLatex(0.32,0.70,"#psi(2S)");
-	//latex->DrawLatex(0.49,0.65,"#varUpsilon(1,2,3S)");
-	//latex->DrawLatex(0.88,0.5,"Z");
-/*
-	latex->SetTextSize(0.04);
-	latex->DrawLatex(0.73,0.67,"p_{T}^{#mu} > 4 GeV/c");
-	latex->DrawLatex(0.73,0.72,"[392-483]");
+//{{{
+	cout << "dimuonYellowPlot: Scaling histograms..." << endl;
 
-	TLegend* leg = new TLegend(0.2,0.75,0.75,0.90);
-	leg->SetBorderSize(0);
-	leg->SetTextSize(0.028);
+	TCanvas* yellowPlotScale = new TCanvas("yellowPlotScale","yellowPlot",500,500);
+	yellowPlotScale->cd();
+	yellowPlotScale->SetLogx();
+	yellowPlotScale->SetLogy();
+
+//bin width scale{{{
+	for(Int_t itrg = 0; itrg < NOT; itrg++)
+	{
+		for(Int_t ibin = 1; ibin <= massHistoUnlikeSignBit[0]->GetNbinsX(); ibin++)
+		{
+			massHistoUnlikeSignBit[itrg]->SetBinContent(ibin, massHistoUnlikeSignBit[itrg]->GetBinContent(ibin)/massHistoUnlikeSignBit[itrg]->GetBinWidth(ibin));
+			massHistoLikeSignBit[itrg]->SetBinContent(ibin, massHistoLikeSignBit[itrg]->GetBinContent(ibin)/massHistoLikeSignBit[itrg]->GetBinWidth(ibin));
+		}
+	}
+//}}}
 
 	for(Int_t itrg = 0; itrg < NOT; itrg++)
 	{
-		leg->AddEntry(massHistoUnlikeSignBit[itrg], Form("%s", triggerName[itrg].Data()), "F");
+		if(itrg == 0)
+		{
+			massHistoUnlikeSignBit[itrg]->GetYaxis()->SetRangeUser(1e-1,8e7);
+			massHistoUnlikeSignBit[itrg]->Draw("");
+		}
+		else massHistoUnlikeSignBit[itrg]->Draw("same");
 	}
-	//leg->AddEntry(massHistoUnlikeSignBit4 ,"L1DoubleMu10","F");
+
+//Draw legend{{{
+	TLegend* leg = new TLegend(0.2,0.73,0.75,0.88);
+	leg->SetBorderSize(0);
+	leg->SetTextSize(0.04);
+	leg->SetTextFont(42);
+	leg->SetHeader("Trigger selections");
+
+	for(Int_t itrg = 0; itrg < NOT; itrg++)
+	{
+		leg->AddEntry(massHistoUnlikeSignBit[itrg], Form("%s", triggerNameh[itrg].Data()), "F");
+	}
 	leg->Draw();
+//}}}
+
+	massHistoUnlikeSignBit[0]->Draw("same");
+
+//Draw text{{{
+	latex->SetTextSize(0.04);
+	latex->DrawLatex(0.24,0.94,"PbPb 2018 partial dataset at #sqrt{s_{NN}} = 5.02 TeV");
+	latex->DrawLatex(0.38,0.67,"J/#psi");
+	//latex->DrawLatex(0.32,0.70,"#psi(2S)");
+	latex->DrawLatex(0.49,0.63,"#varUpsilon(1,2,3S)");
+	latex->DrawLatex(0.85,0.45,"Z");
+	latex->DrawLatex(0.25,0.25,"p_{T}^{#mu} > 4 GeV/c");
+
+	Double_t txtweight = yellowPlotScale->GetTopMargin();
+	latex->SetTextAlign(11);
+	latex->SetTextFont(61);
+	latex->SetTextSize(0.75*txtweight);
+	latex->DrawLatex(0.73, 0.85, "CMS");
+	latex->SetTextFont(52);
+	latex->SetTextSize(0.75*0.76*txtweight);
+	latex->DrawLatex(0.73, 0.80, "Preliminary");
+//}}}
+
+	gPad->RedrawAxis();
 	yellowPlotScale->SaveAs(Form("YellowPlot_binwidth_scaled_%s.pdf", aka.Data()));
 	yellowPlotScale->SaveAs(Form("YellowPlot_binwidth_scaled_%s.png", aka.Data()));
-*/
-
-//{{{
-	TCanvas* yellowPlotScale1 = new TCanvas("yellowPlotScale1","yellowPlot",500,500);
-	yellowPlotScale1->cd();
-	yellowPlotScale1->SetLogx();
-	yellowPlotScale1->SetLogy();
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		for(Int_t ibin = 1; ibin <= massHistoUnlikeSign1[0]->GetNbinsX(); ibin++)
-		{
-			massHistoUnlikeSign1[itrg]->SetBinContent(ibin, massHistoUnlikeSign1[itrg]->GetBinContent(ibin)/massHistoUnlikeSign1[itrg]->GetBinWidth(itrg));
-		}
-	}
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		if(itrg == 0)
-		{
-			massHistoUnlikeSign1[itrg]->GetYaxis()->SetRangeUser(1e-1,8e7);
-			massHistoUnlikeSign1[itrg]->Draw("");
-		}
-		else massHistoUnlikeSign1[itrg]->Draw("same");
-	}
-	latex->SetTextSize(0.04);
-	latex->DrawLatex(0.73,0.67,"p_{T}^{#mu} > 4 GeV/c");
-	latex->DrawLatex(0.73,0.72,"[392-483]");
-
-	TLegend* leg1 = new TLegend(0.2,0.75,0.75,0.90);
-	leg1->SetBorderSize(0);
-	leg1->SetTextSize(0.028);
-
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		leg1->AddEntry(massHistoUnlikeSign1[itrg], Form("%s", triggerName[itrg].Data()), "F");
-	}
-	leg1->Draw();
-	yellowPlotScale1->SaveAs(Form("YellowPlot_binwidth_scaled_HLT_%s.pdf", aka.Data()));
-	yellowPlotScale1->SaveAs(Form("YellowPlot_binwidth_scaled_HLT_%s.png", aka.Data()));
-//}}}
-
-//{{{
-	TCanvas* yellowPlotScale2 = new TCanvas("yellowPlotScale2","yellowPlot",500,500);
-	yellowPlotScale2->cd();
-	yellowPlotScale2->SetLogx();
-	yellowPlotScale2->SetLogy();
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		for(Int_t ibin = 1; ibin <= massHistoUnlikeSign2[0]->GetNbinsX(); ibin++)
-		{
-			massHistoUnlikeSign2[itrg]->SetBinContent(ibin, massHistoUnlikeSign2[itrg]->GetBinContent(ibin)/massHistoUnlikeSign2[itrg]->GetBinWidth(itrg));
-		}
-	}
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		if(itrg == 0)
-		{
-			massHistoUnlikeSign2[itrg]->GetYaxis()->SetRangeUser(1e-1,8e7);
-			massHistoUnlikeSign2[itrg]->Draw("");
-		}
-		else massHistoUnlikeSign2[itrg]->Draw("same");
-	}
-	latex->SetTextSize(0.04);
-	latex->DrawLatex(0.73,0.67,"p_{T}^{#mu} > 4 GeV/c");
-	latex->DrawLatex(0.73,0.72,"[392-483]");
-
-	TLegend* leg2 = new TLegend(0.2,0.75,0.75,0.90);
-	leg2->SetBorderSize(0);
-	leg2->SetTextSize(0.028);
-
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		leg2->AddEntry(massHistoUnlikeSign2[itrg], Form("%s", triggerName[itrg].Data()), "F");
-	}
-	leg2->Draw();
-	yellowPlotScale2->SaveAs(Form("YellowPlot_binwidth_scaled_Reco_%s.pdf", aka.Data()));
-	yellowPlotScale2->SaveAs(Form("YellowPlot_binwidth_scaled_Reco_%s.png", aka.Data()));
-//}}}
-
-//{{{
-	TCanvas* yellowPlotScale3 = new TCanvas("yellowPlotScale3","yellowPlot",500,500);
-	yellowPlotScale3->cd();
-	yellowPlotScale3->SetLogx();
-	yellowPlotScale3->SetLogy();
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		for(Int_t ibin = 1; ibin <= massHistoUnlikeSign3[0]->GetNbinsX(); ibin++)
-		{
-			massHistoUnlikeSign3[itrg]->SetBinContent(ibin, massHistoUnlikeSign3[itrg]->GetBinContent(ibin)/massHistoUnlikeSign3[itrg]->GetBinWidth(itrg));
-		}
-	}
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		if(itrg == 0)
-		{
-			massHistoUnlikeSign3[itrg]->GetYaxis()->SetRangeUser(1e-1,8e7);
-			massHistoUnlikeSign3[itrg]->Draw("");
-		}
-		else massHistoUnlikeSign3[itrg]->Draw("same");
-	}
-	latex->SetTextSize(0.04);
-	latex->DrawLatex(0.73,0.67,"p_{T}^{#mu} > 4 GeV/c");
-	latex->DrawLatex(0.73,0.72,"[392-483]");
-
-	TLegend* leg3 = new TLegend(0.2,0.75,0.75,0.90);
-	leg3->SetBorderSize(0);
-	leg3->SetTextSize(0.028);
-
-	for(Int_t itrg = 0; itrg < NOT; itrg++)
-	{
-		leg3->AddEntry(massHistoUnlikeSign3[itrg], Form("%s", triggerName[itrg].Data()), "F");
-	}
-	leg3->Draw();
-	yellowPlotScale3->SaveAs(Form("YellowPlot_binwidth_scaled_Both_%s.pdf", aka.Data()));
-	yellowPlotScale3->SaveAs(Form("YellowPlot_binwidth_scaled_Both_%s.png", aka.Data()));
 //}}}
 
 /*

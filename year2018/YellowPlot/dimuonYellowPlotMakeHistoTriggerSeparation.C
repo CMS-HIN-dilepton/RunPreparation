@@ -27,7 +27,7 @@
 #include <iostream>
 //}}}
 
-void dimuonYellowPlotMakeHistoTriggerSeparation(TString histoFileName="dimuonMassYellowPlotHistosTriggerSeparation381-636.root") {
+void dimuonYellowPlotMakeHistoTriggerSeparation(TString histoFileName="dimuonMassYellowPlotHistosTriggerSeparation381-941.root") {
   cout << "dimuonYellowPlotMakeHisto: Starting macro dimuonYellowPlotMakeHisto" << endl;
   
  //Input data files with TFile(obsolete){{{ 
@@ -70,7 +70,7 @@ void dimuonYellowPlotMakeHistoTriggerSeparation(TString histoFileName="dimuonMas
   //theChain->Add("/eos/cms/store/group/phys_heavyions/dileptons/Data2018/PbPb502TeV/TTrees/Express/v1/000/326/480/HiOniatree_326480.root");
   //theChain->Add("/eos/cms/store/group/phys_heavyions/dileptons/Data2018/PbPb502TeV/TTrees/Express/v1/000/326/482/HiOniatree_326482.root");
   //theChain->Add("/eos/cms/store/group/phys_heavyions/dileptons/Data2018/PbPb502TeV/TTrees/Express/v1/000/326/392/HiOniatree_326392.root");
-  theChain->Add("/eos/cms/store/group/phys_heavyions/dileptons/Data2018/PbPb502TeV/TTrees/PromptAOD/000/326/Oniatree_326381_326636_PromptAOD_Nov11st.root");
+  theChain->Add("/eos/cms/store/group/phys_heavyions/dileptons/Data2018/PbPb502TeV/TTrees/PromptAOD/Oniatree_326381_326941_PromptAOD_EvtSel_Nov25th.root");
   //cout << "Added A file, entries: " << theChain->GetEntries() << endl;
 
 /*
@@ -118,7 +118,6 @@ void dimuonYellowPlotMakeHistoTriggerSeparation(TString histoFileName="dimuonMas
   }
 //}}}
 
-  
   cout << "dimuonYellowPlot: booking mass histogram with ";
   cout << nBins << " mass bins, mass limits: ";
   cout << bins[0] << " - " << bins[nBins] << endl;
@@ -164,25 +163,25 @@ void dimuonYellowPlotMakeHistoTriggerSeparation(TString histoFileName="dimuonMas
 	TH1F* maxDaughterMuonPtBit[NOT];
 	for(Int_t itrg = 0; itrg < NOT; itrg++)
 	{
-		massHistoUnlikeSignBit[itrg] = new TH1F(Form("massHistoUnlikeSignBit%d", tBits[itrg]), Form("massHistoUnlikeSignBit%d;m_{#mu#mu} (GeV/c^{2});Events/(GeV/c^{2})", tBits[itrg]), nBins, bins);
-		massHistoLikeSignBit[itrg] = new TH1F(Form("massHistoLikeSignBit%d", tBits[itrg]), Form("massHistoLikeSignBit%d;m_{#mu#mu} (GeV/c^{2});Events/(GeV/c^{2})", tBits[itrg]), nBins, bins);
+		massHistoUnlikeSignBit[itrg] = new TH1F(Form("massHistoUnlikeSignBit%d", tBits[itrg]), Form("massHistoUnlikeSignBit%d;m_{#mu#mu} (GeV/c^{2});Entries/(GeV/c^{2})", tBits[itrg]), nBins, bins);
+		massHistoLikeSignBit[itrg] = new TH1F(Form("massHistoLikeSignBit%d", tBits[itrg]), Form("massHistoLikeSignBit%d;m_{#mu#mu} (GeV/c^{2});Entries/(GeV/c^{2})", tBits[itrg]), nBins, bins);
 		centralityBit[itrg] = new TH1F(Form("centralityBit%d", tBits[itrg]), Form("centralityBit%d;Centrality Bin;Counts", tBits[itrg]),200,0,200);
 		maxDaughterMuonPtBit[itrg] = new TH1F(Form("maxDaughterMuonPtBit%d", tBits[itrg]), Form("maxDaughterMuonPtBit%d;max(p_{T}^{#mu+},p_{T}^{#mu-}) GeV/c; Counts", tBits[itrg]),100,0,100);
 	}
 
 /*
 //sample{{{
-  TH1F* massHistoUnlikeSignBit1 = new TH1F("massHistoUnlikeSignBit1","massHistoUnlikeSignBit1;m_{#mu#mu} (GeV/c^{2});Events/(GeV/c^{2})",nBins,bins);
-  TH1F* massHistoUnlikeSignBit4 = new TH1F("massHistoUnlikeSignBit4","massHistoUnlikeSignBit4;m_{#mu#mu} (GeV/c^{2});Events/(GeV/c^{2})",nBins,bins);
+  TH1F* massHistoUnlikeSignBit1 = new TH1F("massHistoUnlikeSignBit1","massHistoUnlikeSignBit1;m_{#mu#mu} (GeV/c^{2});Entries/(GeV/c^{2})",nBins,bins);
+  TH1F* massHistoUnlikeSignBit4 = new TH1F("massHistoUnlikeSignBit4","massHistoUnlikeSignBit4;m_{#mu#mu} (GeV/c^{2});Entries/(GeV/c^{2})",nBins,bins);
 
-  TH1F* massHistoLikeSignBit4 = new TH1F("massHistoLikeSignBit4","massHistoLikeSignBit4;m_{#mu#mu} (GeV/c^{2});Events/(GeV/c^{2})",nBins,bins);
+  TH1F* massHistoLikeSignBit4 = new TH1F("massHistoLikeSignBit4","massHistoLikeSignBit4;m_{#mu#mu} (GeV/c^{2});Entries/(GeV/c^{2})",nBins,bins);
 
   TH1F* centralityBit4 = new TH1F("centralityBit4","centralityBit4;Centrality Bin;Counts",200,0,200);
   
   TH1F* maxDaughterMuonPtBit4 = new TH1F("maxDaughterMuonPtBit4","maxDaughterMuonPtBit4;max(p_{T}^{#mu+},p_{T}^{#mu-}) GeV/c; Counts",100,0,100);
 
-	TH1F* massHistoLikeSign = new TH1F("massHistoLikeSign","massHistoLikeSign;m_{#mu#mu} (GeV/c^{2});Events/(GeV/c^{2})",nBins,bins);
-	TH1F* massHistoSubtracted = new TH1F("massHistoSubtracted","massHistoSubtracted;m_{#mu#mu} (GeV/c^{2});Events/(GeV/c^{2})",nBins,bins);
+	TH1F* massHistoLikeSign = new TH1F("massHistoLikeSign","massHistoLikeSign;m_{#mu#mu} (GeV/c^{2});Entries/(GeV/c^{2})",nBins,bins);
+	TH1F* massHistoSubtracted = new TH1F("massHistoSubtracted","massHistoSubtracted;m_{#mu#mu} (GeV/c^{2});Entries/(GeV/c^{2})",nBins,bins);
 	TH2F* h3 = new TH2F("h3","h3;#eta_{#mu^{+}} - #eta_{#mu^{-}};#mu^{+}#mu^{-} mass",500,-5.0,5.0,nBins,bins);
 //}}}
 */
@@ -273,7 +272,7 @@ void dimuonYellowPlotMakeHistoTriggerSeparation(TString histoFileName="dimuonMas
 		//theChain->Draw("Reco_QQ_4mom.M()>>massHistoUnlikeSignBit4", "(HLTriggers&(1<<(4-1))==1<<(4-1))&&(Reco_QQ_trig&(1<<(4-1)))==(1<<(4-1))&&Reco_QQ_type==0&&Reco_QQ_sign==0&&Reco_QQ_mupl_4mom.Pt()>4&&Reco_QQ_mumi_4mom.Pt()>4","");
 		for(Int_t itrg = 0; itrg < NOT; itrg++)
 		{
-/*
+
 //include Reco_QQ_trig{{{
 			cout << "Drawing mass, unlike sign... bit " << tBits[itrg] << endl;
 			theChain->Draw(Form("Reco_QQ_4mom.M()>>massHistoUnlikeSignBit%d", tBits[itrg]), Form("((HLTriggers&pow(2,%d))==pow(2,%d))&&((Reco_QQ_trig&pow(2,%d))==pow(2,%d))&&Reco_QQ_type==1&&Reco_QQ_sign==0&&Reco_QQ_mupl_4mom.Pt()>4&&Reco_QQ_mumi_4mom.Pt()>4", tBits[itrg], tBits[itrg], tBits[itrg], tBits[itrg]),"");
@@ -284,7 +283,7 @@ void dimuonYellowPlotMakeHistoTriggerSeparation(TString histoFileName="dimuonMas
 			cout << "Drawing max daughter pt, bit " << tBits[itrg] << endl;
 			theChain->Draw(Form("max(Reco_QQ_mumi_4mom.Pt(),Reco_QQ_mupl_4mom.Pt())>>maxDaughterMuonPtBit%d", tBits[itrg]), Form("((HLTriggers&pow(2,%d))==pow(2,%d))&&((Reco_QQ_trig&pow(2,%d))==pow(2,%d))", tBits[itrg], tBits[itrg], tBits[itrg], tBits[itrg]), "");
 //}}}
-*/
+/*
 //without Reco_QQ_trig{{{
 			cout << "Drawing mass, unlike sign... bit " << tBits[itrg] << endl;
 			theChain->Draw(Form("Reco_QQ_4mom.M()>>massHistoUnlikeSignBit%d", tBits[itrg]), Form("((HLTriggers&pow(2,%d))==pow(2,%d))&&Reco_QQ_type==1&&Reco_QQ_sign==0&&Reco_QQ_mupl_4mom.Pt()>4&&Reco_QQ_mumi_4mom.Pt()>4", tBits[itrg], tBits[itrg]), "");
@@ -295,6 +294,7 @@ void dimuonYellowPlotMakeHistoTriggerSeparation(TString histoFileName="dimuonMas
 			cout << "Drawing max daughter pt, bit " << tBits[itrg] << endl;
 			theChain->Draw(Form("max(Reco_QQ_mumi_4mom.Pt(),Reco_QQ_mupl_4mom.Pt())>>maxDaughterMuonPtBit%d", tBits[itrg]), Form("((HLTriggers&pow(2,%d))==pow(2,%d))", tBits[itrg], tBits[itrg]), "");
 //}}}
+*/
 		}
 	}
   else {
