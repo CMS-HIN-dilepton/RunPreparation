@@ -1,8 +1,0 @@
-HLT_HIL2Mu0_L1SingleMuOpen_v
-HLT_HIL2Mu0_L1DoubleMuOpen_v
-HLT_HIL2Mu0p5_L1DoubleMuOpen_v
-HLT_HIL2Mu1_L1DoubleMuOpen_v
-HLT_HIL2Mu1p5_L1DoubleMuOpen_v
-HLT_HIL2Mu2_L1DoubleMuOpen_v
-HLT_HIL2Mu2p5_L1DoubleMuOpen_v
-HLT_HIL2Mu3_L1DoubleMuOpen_v

@@ -44,9 +44,9 @@ MAXJOBS=7
 
 
 #list of triggers to process, listed in file triggersLx.txt
-TRIGGERSL1=$( cat triggersL1_v1230.txt )
-TRIGGERSL2=$( cat triggersL2_v1230.txt )
-TRIGGERSL3=$( cat triggersL3_v1230.txt )
+TRIGGERSL1=$( cat triggersL1.txt )
+TRIGGERSL2=$( cat triggersL2.txt )
+TRIGGERSL3=$( cat triggersL3.txt )
 TRIGGERS=( ${TRIGGERSL1[@]} ${TRIGGERSL2[@]} ${TRIGGERSL3[@]} )
 
 OUTPUTDIR="${OUTPUTPATH}/$( basename ${ONIAFILEPATH%.*})"
