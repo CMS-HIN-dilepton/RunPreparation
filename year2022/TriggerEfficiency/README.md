@@ -1,6 +1,8 @@
 Trigger efficiency plots for dimuon triggers
 
-T## Muon Trigger Efficiency
+To run this code follow these instructions:
+
+## Muon Trigger Efficiency
 
 # HOW TO USE
 To use the code, first compile with make command in the main directory:
@@ -33,7 +35,6 @@ Efficiencies are calculated as a function of pt, rapidity, centrality and pt+rap
 A plot of superimposed efficiencies as function of pt per trigger level is output in this directory.
 A directory named "report" contains a pdf with all plots for efficiencies calculated.
 
-Similarly the bash script trigeff.sh can be configured and ran to calculate trigger efficiency of just one trigger
-at a time.o run this code follow these instructions:
+Similarly the bash script trigeff.sh can be configured and ran to calculate trigger efficiency of just one trigger at a time.
 
 
