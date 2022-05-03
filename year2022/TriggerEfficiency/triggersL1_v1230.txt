@@ -1,0 +1,6 @@
+HLT_HIL1SingleMuOpen_v
+HLT_HIL1DoubleMuOpen_v
+HLT_HIL1DoubleMu3Open_v
+HLT_HIL1DoubleMu5Open_v
+HLT_HIL1DoubleMu7Open_v
+HLT_HIL1DoubleMu10Open_v

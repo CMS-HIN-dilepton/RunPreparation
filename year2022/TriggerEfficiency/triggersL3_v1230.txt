@@ -1,0 +1,7 @@
+HLT_Mu12_v
+HLT_Mu25_TkMu0_Onia_v
+HLT_Mu2p5_L2Mu2_Jpsi_v
+HLT_Mu2_L2Mu0_Upsilon_v
+HLT_HIL3Mu0_L2Mu0_L1SingleMuOpen_v
+HLT_HIL3Mu0_L2Mu0_L1SingleMuOpen3_v
+HLT_HIL3Mu0_L2Mu0_L1DoubleMuOpen_v

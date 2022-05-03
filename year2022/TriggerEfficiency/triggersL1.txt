@@ -1,0 +1,8 @@
+HLT_HIL1DoubleMuOpen_v1
+HLT_HIL1DoubleMu3Open_v1
+HLT_HIL1DoubleMu3p5Open_v1
+HLT_HIL1DoubleMu4Open_v1
+HLT_HIL1DoubleMu4p5Open_v1
+HLT_HIL1DoubleMu5Open_v1
+HLT_HIL1DoubleMu7Open_v1
+HLT_HIL1DoubleMu10Open_v1
