@@ -54,5 +54,5 @@ const char histYLabel[]="y^{#mu}";
 const char histCentLabel[]="Centrality";
 
 const float endcapRap=1.6f;
-
+bool Isfoward(float pt, float absrap);
 #endif

@@ -14,6 +14,18 @@ void readTotals(TFile* inputFile, Output* out);
 void readPass(TFile* inputFile, Output* output);
 Output allocateOutput(bool highPt);
 
+bool Isfoward(bool isfwd, float pt, float absrap){
+	if(isfwd){
+		if(absrap<2.4 && absrap>1.6) return pt>3;
+		else false;
+		}
+			
+	else{
+		if(absrap <1.6) return pt>6.5;
+		else false;
+		}
+}
+
 void PlotEff(const char* inputfilename, const char* outputFilename, const char* ptRange)
 {
     std::string outFilename=outputFilename;
@@ -59,9 +71,9 @@ void readTotals(TFile* inputFile, Output* output)
         output->cent.den->Fill(input->cent);
         output->y.den->Fill(input->y);
         output->pt_y.den->Fill(input->y,input->pt);
-        if (input->eta > endcapRap) 
+        if (Isfoward(1,input->pt,fabs(input->y))) 
             output->pt_fwd.den->Fill(input->pt);
-        else
+	if(Isfoward(0,input->pt,fabs(input->y)))
             output->pt_mid.den->Fill(input->pt);
     }
 }
@@ -80,9 +92,9 @@ void readPass(TFile* inputFile, Output* output)
         output->cent.num->Fill(input->cent);
         output->y.num->Fill(input->y);
         output->pt_y.num->Fill(input->y,input->pt);
-        if (fabs(input->eta) > endcapRap) 
+        if (Isfoward(1,input->pt,fabs(input->y))) 
             output->pt_fwd.num->Fill(input->pt);
-        else
+	if(Isfoward(0,input->pt,fabs(input->y)))
             output->pt_mid.num->Fill(input->pt);
     }
 }

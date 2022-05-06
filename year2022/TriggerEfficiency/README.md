@@ -16,6 +16,7 @@ multiTrigeff.sh bash script. Inside set the variables:
 ONIAFILEPATH, TRIGGERFILEPATH, OUTPUTPATH, PTRANGE, MAXJOBS
 to configure the path to reco file, trigger file and output directory respectively.
 
+use triggername.sh to split triggers by typing oniafilename 
 Files triggersL1.txt triggersL2.txt and triggersL3.txt contains the list of
 triggers to process for L1, L2 and L3 triggers respectively.
 
