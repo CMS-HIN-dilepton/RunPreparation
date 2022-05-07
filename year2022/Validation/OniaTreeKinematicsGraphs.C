@@ -76,14 +76,14 @@ void OniaTreeKinematicsGraphs(){
 	TH1F *QQpTHist = new TH1F("QQpTHist", "Double muon p_{T};p_{T} (GeV);", 200, 0, 50.);
 	TH1F *muplEtaHist = new TH1F("muplEtaHist", "Single #mu^{+} sudo rapidity (#eta);#eta;", 100, -5., 5.);
 	TH1F *mumiEtaHist = new TH1F("mumiEtaHist", "Single #mu^{-} sudo rapidity (#eta);#eta;", 100, -5., 5.);
-	TH1F *QQEtaHist = new TH1F("QQEtaHist", "Double muon sudorapidity (#eta);#eta;", 100, -10., 10.);
+	TH1F *QQEtaHist = new TH1F("QQEtaHist", "Double muon sudorapidity (#eta);#eta;", 100, -5., 5.);
 	
-	// Bit1: Double muon inclusive -> Index=0
-	// Bit13: J/psi region -> Index=1
-	// Bit14: Upsilon + high masses -> Index=2
+	// (Bit1: Double muon inclusive -> Index=0)
+	// (Bit13: J/psi region -> Index=1)
+	// (Bit14: Upsilon + high masses -> Index=2)
 	const Int_t NTriggers = 3;
 	const Int_t Bits[NTriggers] = {1, 13, 14};
-	const int SelectBitsIndex = 1;
+	const int SelectBitsIndex = 1; // (Selected J/psi region)
 
 	// ******** Define variables in Onia tree ******** //
     Int_t Centrality;
@@ -98,7 +98,7 @@ void OniaTreeKinematicsGraphs(){
     Short_t Reco_QQ_mumi_idx[1000];
 	TClonesArray *CloneArr_mu;
   
-  	// (parameters for quality cuts)
+  	// (id variables : information from the inner track muons)
   	float_t Reco_QQ_VtxProb[1000];
     Int_t Reco_mu_nPixWMea[1000];
     Int_t Reco_mu_nTrkWMea[1000];
@@ -151,7 +151,28 @@ void OniaTreeKinematicsGraphs(){
 
 			// ******** Apply cuts ******** //
 			if( ((HLTriggers&(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))==(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))
-			 && ((Reco_QQ_trig[j]&(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))==(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))){
+			 && ((Reco_QQ_trig[j]&(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))==(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))
+
+			 // (Hybrid-Soft acceptance cut, https://twiki.cern.ch/twiki/bin/view/CMS/DileptonMuonSelection#PbPb_2018_and_2017_pp_5_02_TeV)
+			 &&((abs(Reco_QQ_4mom->Eta())>=0.0 && abs(Reco_QQ_4mom->Eta())<0.3  && Reco_QQ_4mom->Pt()>3.4)||
+			 	(abs(Reco_QQ_4mom->Eta())>=0.3 && abs(Reco_QQ_4mom->Eta())<1.1  && Reco_QQ_4mom->Pt()>3.3)||
+			 	(abs(Reco_QQ_4mom->Eta())>=1.1 && abs(Reco_QQ_4mom->Eta())<1.4  && Reco_QQ_4mom->Pt()>7.7-4.0*abs(Reco_QQ_4mom->Eta()))||
+			 	(abs(Reco_QQ_4mom->Eta())>=1.4 && abs(Reco_QQ_4mom->Eta())<1.55 && Reco_QQ_4mom->Pt()>2.1)||
+			 	(abs(Reco_QQ_4mom->Eta())>=1.55 && abs(Reco_QQ_4mom->Eta())<2.2 && Reco_QQ_4mom->Pt()>4.25-1.39*abs(Reco_QQ_4mom->Eta()))||
+			 	(abs(Reco_QQ_4mom->Eta())>=2.2 && abs(Reco_QQ_4mom->Eta())<=2.4 && Reco_QQ_4mom->Pt()>1.2))
+
+			 // (quality cut)
+ 			 /*&& (Reco_QQ_VtxProb[l]>=0.01) 				// (reconstructed dimuon vertex probabiliy > 1%)
+			 && (Reco_mu_nTrkWMea[Reco_QQ_mupl_idx[l]]>5)   // (at least 6 hits in the silicon strip layers)
+			 && (Reco_mu_nTrkWMea[Reco_QQ_mumi_idx[l]]>5)
+			 && (Reco_mu_nPixWMea[Reco_QQ_mupl_idx[l]]>0)   // (at least 1 hit in the pixel detectors)
+			 && (Reco_mu_nPixWMea[Reco_QQ_mumi_idx[l]]>0)
+			 && (abs(Reco_mu_dxy[Reco_QQ_mupl_idx[l]])<0.3) // (distance btw the track and the event vertex_xy <0.3cm)
+			 && (abs(Reco_mu_dxy[Reco_QQ_mumi_idx[l]])<0.3)
+ 			 && (abs(Reco_mu_dz[Reco_QQ_mupl_idx[l]])<20.)  // (distance btw the track and the event vertex_z <20cm)
+			 && (abs(Reco_mu_dz[Reco_QQ_mumi_idx[l]])<20.)*/
+
+			 ){
 
 				// ******** Fill histograms ******** //
 				CenHist -> Fill(Centrality);
@@ -162,31 +183,33 @@ void OniaTreeKinematicsGraphs(){
 				muplEtaHist -> Fill(Reco_mupl_4mom->Eta());
 				mumiEtaHist -> Fill(Reco_mumi_4mom->Eta());
 			}
+
+			else continue;
 		}
 	}
 
 	// ******** Draw and save histograms ******** //
 	TCanvas *c1 = new TCanvas("c1", "c1", 1000, 1000);
 	CenHist -> Draw();
-	c1 -> SaveAs("1_Centrality.gif");
+	c1 -> SaveAs("1_Centrality_AcceptanceCut.gif");
 	TCanvas *c2 = new TCanvas("c2", "c2", 1000, 1000);
 	QQpTHist -> Draw();
-	c2 -> SaveAs("1_QQpT.gif");
+	c2 -> SaveAs("1_QQpT_AcceptanceCut.gif");
 	TCanvas *c3 = new TCanvas("c3", "c3", 1000, 1000);
 	muplpTHist -> Draw();
-	c3 -> SaveAs("1_muplpT.gif");
+	c3 -> SaveAs("1_muplpT_AcceptanceCut.gif");
 	TCanvas *c4 = new TCanvas("c4", "c4", 1000, 1000);
 	mumipTHist -> Draw();
-	c4 -> SaveAs("1_mumipT.gif");
+	c4 -> SaveAs("1_mumipT_AcceptanceCut.gif");
 	TCanvas *c5 = new TCanvas("c5", "c5", 1000, 1000);
 	QQEtaHist -> Draw();
-	c5 -> SaveAs("1_QQeta.gif");
+	c5 -> SaveAs("1_QQeta_AcceptanceCut.gif");
 	TCanvas *c6 = new TCanvas("c6", "c6", 1000, 1000);
 	muplEtaHist -> Draw();
-	c6 -> SaveAs("1_mupleta.gif");
+	c6 -> SaveAs("1_mupleta_AcceptanceCut.gif");
 	TCanvas *c7 = new TCanvas("c7", "c7", 1000, 1000);
 	mumiEtaHist -> Draw();			
-	c7 -> SaveAs("1_mumieta.gif");	
+	c7 -> SaveAs("1_mumieta_AcceptanceCut.gif");	
 
 
 	// ******** End measuring time ******** //
