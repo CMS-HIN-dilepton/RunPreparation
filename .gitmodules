@@ -1,0 +1,4 @@
+[submodule "year2022/RateCalc"]
+	path = year2022/RateCalc
+	url = git@github.com:vince502/RateCalc.git
+	branch = master
