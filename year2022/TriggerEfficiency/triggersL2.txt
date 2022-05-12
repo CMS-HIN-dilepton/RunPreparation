@@ -1,5 +1,0 @@
-HLT_HIL2DoubleMuOpen_v1
-HLT_HIL2DoubleMu1Open_v1
-HLT_HIL2DoubleMu1p5Open_v1
-HLT_HIL2DoubleMu2Open_v1
-HLT_HIL2DoubleMu3Open_v1
