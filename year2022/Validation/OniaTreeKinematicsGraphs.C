@@ -150,11 +150,11 @@ void OniaTreeKinematicsGraphs(){
 			TLorentzVector *Reco_QQ_4mom = (TLorentzVector*) CloneArr_QQ->At(j);
 
 			// ******** Apply cuts ******** //
-			if( ((HLTriggers&(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))==(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))
-			 && ((Reco_QQ_trig[j]&(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))==(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))
+			if( /*((HLTriggers&(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))==(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))
+			 && ((Reco_QQ_trig[j]&(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))==(ULong64_t)(1<<(Bits[SelectBitsIndex]-1)))*/
 
 			 // (Hybrid-Soft acceptance cut, https://twiki.cern.ch/twiki/bin/view/CMS/DileptonMuonSelection#PbPb_2018_and_2017_pp_5_02_TeV)
-			 &&((abs(Reco_QQ_4mom->Eta())>=0.0 && abs(Reco_QQ_4mom->Eta())<0.3  && Reco_QQ_4mom->Pt()>3.4)||
+			 /*&&*/((abs(Reco_QQ_4mom->Eta())>=0.0 && abs(Reco_QQ_4mom->Eta())<0.3  && Reco_QQ_4mom->Pt()>3.4)||
 			 	(abs(Reco_QQ_4mom->Eta())>=0.3 && abs(Reco_QQ_4mom->Eta())<1.1  && Reco_QQ_4mom->Pt()>3.3)||
 			 	(abs(Reco_QQ_4mom->Eta())>=1.1 && abs(Reco_QQ_4mom->Eta())<1.4  && Reco_QQ_4mom->Pt()>7.7-4.0*abs(Reco_QQ_4mom->Eta()))||
 			 	(abs(Reco_QQ_4mom->Eta())>=1.4 && abs(Reco_QQ_4mom->Eta())<1.55 && Reco_QQ_4mom->Pt()>2.1)||
