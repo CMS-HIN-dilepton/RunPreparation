@@ -1,0 +1,48 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usefonttheme{professionalfonts}
+
+\usetheme{Antibes}
+
+\newcommand{\drawHLT}[1]{
+	\begin{frame}
+		\frametitle{Trigger \detokenize{#1}}
+		\includegraphics[scale=0.45]{../#1/output_eff_pt.pdf}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Trigger \detokenize{#1}}
+		\includegraphics[scale=0.45]{../#1/output_eff_y.pdf}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Trigger \detokenize{#1}}
+		\includegraphics[scale=0.45]{../#1/output_eff_pt_fwd.pdf}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Trigger \detokenize{#1}}
+		\includegraphics[scale=0.45]{../#1/output_eff_pt_mid.pdf}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Trigger \detokenize{#1}}
+		\includegraphics[scale=0.45]{../#1/output_eff_cent.pdf}
+	\end{frame}
+	\begin{frame}
+		\frametitle{Trigger \detokenize{#1}}
+		\includegraphics[scale=0.45]{../#1/output_eff_pt_y.pdf}
+	\end{frame}
+}
+
+\begin{document}
+
+\drawHLT{HLT_HIL1SingleMu0Cosmics_v}
+\drawHLT{HLT_HIL1SingleMu0_v}
+\drawHLT{HLT_HIL1SingleMu0DQ_v}
+\drawHLT{HLT_HIL1SingleMu0Open_v}
+\drawHLT{HLT_HIL2SingleMu0_L1Mu0Cosmic_v}
+\drawHLT{HLT_HIL2SingleMu0_MinBias_v}
+\drawHLT{HLT_HIL2SingleMu0_L1Mu0Open_v}
+\drawHLT{HLT_HIL3SingleMu0_L1Mu0Cosmic_v}
+\drawHLT{HLT_HIL3SingleMu0_MinBias_v}
+\drawHLT{HLT_HIL3SingleMu0_L1Mu0Open_v}
+
+\end{document}
