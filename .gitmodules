@@ -1,0 +1,3 @@
+[submodule "year2022/EffCalc"]
+	path = year2022/EffCalc
+	url = git@github.com:vince502/EffCalc.git
